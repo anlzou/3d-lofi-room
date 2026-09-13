@@ -24,7 +24,7 @@ export interface WorldState {
   showcase: boolean;
   audio: { enabled: boolean; masterVolume: number };
   camera: 'room' | 'desk' | 'window' | 'tv';
-  devices: { lamp: boolean; bedsideLamp:boolean; ceilingLamp:boolean; lavaLamp:boolean; stringLights:boolean; streetLamp:boolean; tv: boolean; mac: boolean; windowOpen: boolean; fanSpeed: 0 | 1 | 2; heater: boolean };
+  devices: { lamp: boolean; bedsideLamp:boolean; ceilingLamp:boolean; lavaLamp:boolean; stringLights:boolean; streetLamp:boolean; tv: boolean; mac: boolean; windowOpen: boolean; blinds: boolean; fanSpeed: 0 | 1 | 2; heater: boolean };
   levels: LightLevels;
   // Look of the window string lights, drawn as a neon strip: hex colour, blink rate in Hz
   // (0 keeps the strip steady), plus the automatic hue cycle, the running chase and the
@@ -50,20 +50,24 @@ export type ShowcaseDevices = WorldState['devices'];
 export interface ShowcaseStep { id: string; label: string; devices: ShowcaseDevices }
 // One plausible day for the room. Each row starts a stretch of the routine; the lamps in
 // `on` light up for that stretch and everything else stays dark. Street lamps are handled
-// separately below because they answer to the sun, not to the household.
+// separately below because they answer to the sun, not to the household. `blinds` is part of
+// the routine too, because the curtains answer the lamps: they are still down when the bedside
+// lamp comes on, and they are pulled shut before the desk lamp goes out for the night.
 const showcaseSteps: { start: number; id: string; label: string; on: Partial<ShowcaseDevices> }[] = [
   { start: 0, id: 'sleep', label: '深夜安睡', on: {} },
   { start: 6.6, id: 'wake', label: '起床', on: { bedsideLamp: true } },
-  { start: 7.4, id: 'morning', label: '晨间', on: { ceilingLamp: true } },
-  { start: 8.6, id: 'work-am', label: '上午工作', on: { lamp: true, mac: true } },
-  { start: 12, id: 'lunch', label: '午休', on: { lamp: true, tv: true } },
-  { start: 13.5, id: 'work-pm', label: '下午工作', on: { lamp: true, mac: true } },
-  { start: 17.6, id: 'home', label: '傍晚回家', on: { ceilingLamp: true, tv: true, stringLights: true } },
-  { start: 19.2, id: 'evening', label: '夜间', on: { ceilingLamp: true, lamp: true, tv: true, mac: true, lavaLamp: true, stringLights: true } },
-  { start: 22.6, id: 'reading', label: '深夜阅读', on: { lamp: true, bedsideLamp: true, lavaLamp: true, stringLights: true } },
+  { start: 6.9, id: 'curtains-up', label: '拉开窗帘', on: { bedsideLamp: true, blinds: true } },
+  { start: 7.4, id: 'morning', label: '晨间', on: { ceilingLamp: true, blinds: true } },
+  { start: 8.6, id: 'work-am', label: '上午工作', on: { lamp: true, mac: true, blinds: true } },
+  { start: 12, id: 'lunch', label: '午休', on: { lamp: true, tv: true, blinds: true } },
+  { start: 13.5, id: 'work-pm', label: '下午工作', on: { lamp: true, mac: true, blinds: true } },
+  { start: 17.6, id: 'home', label: '傍晚回家', on: { ceilingLamp: true, tv: true, stringLights: true, blinds: true } },
+  { start: 19.2, id: 'evening', label: '夜间', on: { ceilingLamp: true, lamp: true, tv: true, mac: true, lavaLamp: true, stringLights: true, blinds: true } },
+  { start: 22.6, id: 'reading', label: '深夜阅读', on: { lamp: true, bedsideLamp: true, lavaLamp: true, stringLights: true, blinds: true } },
+  { start: 23, id: 'curtains-down', label: '拉上窗帘', on: { lamp: true, bedsideLamp: true, blinds: false } },
   { start: 23.6, id: 'wind-down', label: '准备睡觉', on: { bedsideLamp: true } },
 ];
-const darkDevices: ShowcaseDevices = { lamp: false, bedsideLamp: false, ceilingLamp: false, lavaLamp: false, stringLights: false, streetLamp: false, tv: false, mac: false, windowOpen: false, fanSpeed: 0, heater: false };
+const darkDevices: ShowcaseDevices = { lamp: false, bedsideLamp: false, ceilingLamp: false, lavaLamp: false, stringLights: false, streetLamp: false, tv: false, mac: false, windowOpen: false, blinds: false, fanSpeed: 0, heater: false };
 export function showcaseAt(hour: number, season: Season, weather: Weather = 'clear'): ShowcaseStep {
   const h = ((hour % 24) + 24) % 24;
   let step = showcaseSteps[0];
@@ -101,7 +105,7 @@ export function restoreState(raw: unknown, query = ''): WorldState {
     if (typeof r.autopilot === 'boolean') d.autopilot = r.autopilot;
     if (typeof r.showcase === 'boolean') d.showcase = r.showcase;
     if (['room','desk','window','tv'].includes(r.camera!)) d.camera = r.camera!;
-    if (r.devices && typeof r.devices === 'object') for (const key of ['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp','tv','mac','windowOpen','heater'] as const) {
+    if (r.devices && typeof r.devices === 'object') for (const key of ['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp','tv','mac','windowOpen','blinds','heater'] as const) {
       if (typeof r.devices[key] === 'boolean') d.devices[key] = r.devices[key];
     }
     // Older saves have no levels; they fall back to the tuned default output.
@@ -134,7 +138,7 @@ export function createDefaultState(): WorldState {
     // own day, starting late morning so there is light to see it by.
     schemaVersion: 2, season: 'autumn', time: 11 + 30 / 60, weather: 'clear', autopilot: false, showcase: true,
     audio: { enabled: false, masterVolume: 0.12 }, camera: 'room',
-    devices: { lamp: true, bedsideLamp:false, ceilingLamp:false, lavaLamp:false, stringLights:false, streetLamp:true, tv: true, mac: true, windowOpen: false, fanSpeed: 0, heater: false },
+    devices: { lamp: true, bedsideLamp:false, ceilingLamp:false, lavaLamp:false, stringLights:false, streetLamp:true, tv: true, mac: true, windowOpen: false, blinds: true, fanSpeed: 0, heater: false },
     levels: { lamp: 1, bedsideLamp: 1, ceilingLamp: 1, lavaLamp: 1, stringLights: 1, streetLamp: 1, mac: 1, tv: 1 },
     strip: { color: '#ffb266', blink: 0, cycle: false, chase: false, rainbow: false },
   };

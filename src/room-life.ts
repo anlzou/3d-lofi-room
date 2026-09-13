@@ -85,6 +85,92 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
     m.emissive.set('#ffcf8f');m.emissiveIntensity=0;m.toneMapped=false;
     o.material=m;globeLand.push({mat:m,strength:.18});
   });
+  // The wall clock reads the hour the room is living. The exported hands are not pivot-ready: an
+  // origin sits somewhere along the hand instead of at the dial, so turning one directly spins it
+  // about itself, and turning it about the dial centre makes the whole shape orbit instead of
+  // swing. So each hand gets a pivot at the centre of the clock body, is slid along its own length
+  // until its base sits on that centre, and remembers the angle the model drew it at — that pose is
+  // the model's 12 o'clock, whatever it happens to be — so the dial reads true afterwards.
+  const clockHands:{pivot:THREE.Object3D;axis:'x'|'y'|'z';sign:number;period:number;rest:number}[]=[];
+  const clockBody = root.getObjectByName('INT_clock_wall');
+  const dialUp = new THREE.Vector3(0, 1, 0);
+  if (clockBody) {
+    const centre = new THREE.Box3().setFromObject(clockBody).getCenter(new THREE.Vector3());
+    const dial = root.getObjectByName('WallClock_Face');
+    for (const [name, period] of [['ANIM_clock_hour', 12], ['ANIM_clock_minute', 1]] as const) {
+      const hand = root.getObjectByName(name);
+      if (!(hand instanceof THREE.Mesh) || !hand.parent) continue;
+      // The geometry's own bounding box handles interleaved attributes too, which is what Draco
+      // hands arrive as: reading the position attribute and casting it to a plain BufferAttribute is
+      // how the hands ended up with a NaN offset and disappeared.
+      hand.geometry.computeBoundingBox();
+      const bounds = hand.geometry.boundingBox;
+      if (!bounds) continue;
+      const extent = bounds.getSize(new THREE.Vector3());
+      const thin = extent.x <= extent.y && extent.x <= extent.z ? 'x' : extent.y <= extent.z ? 'y' : 'z';
+      // A hand is a flat shape, so the thinnest of its local axes is the face normal. The dial sits
+      // in front of the body, so the body-to-dial offset says which way "out" is — that is the side
+      // the hands have to run clockwise from, and 12 o'clock is up on a wall clock.
+      const faceNormal = new THREE.Vector3(thin === 'x' ? 1 : 0, thin === 'y' ? 1 : 0, thin === 'z' ? 1 : 0)
+        .applyQuaternion(hand.getWorldQuaternion(new THREE.Quaternion()));
+      const outward = dial
+        ? new THREE.Box3().setFromObject(dial).getCenter(new THREE.Vector3()).sub(centre)
+        : hand.getWorldPosition(new THREE.Vector3()).sub(centre);
+      if (faceNormal.dot(outward) < 0) faceNormal.negate();
+      // The hand's own vertices, in world space. Its base is the point of the shape that comes
+      // closest to the dial centre and its tip is the vertex furthest from that base: bounding-box
+      // corners cannot do this job, because a tilted hand has corners that sit off the hand itself,
+      // which is what left the two hands reading from slightly different points.
+      const attribute = hand.geometry.getAttribute('position');
+      const vertices:THREE.Vector3[]=[];
+      const scratch = new THREE.Vector3();
+      for (let i = 0; i < attribute.count; i++) {
+        vertices.push(scratch.fromBufferAttribute(attribute, i).clone().applyMatrix4(hand.matrixWorld));
+      }
+      if (!vertices.length) continue;
+      let base = vertices[0], near = Infinity, tip = vertices[0], far = -1;
+      for (const vertex of vertices) { const d = vertex.distanceToSquared(centre); if (d < near) { near = d; base = vertex; } }
+      for (const vertex of vertices) { const d = vertex.distanceToSquared(base); if (d > far) { far = d; tip = vertex; } }
+      const drawn = tip.clone().sub(base);
+      if (drawn.lengthSq() === 0) continue;
+      drawn.normalize();
+      const right = new THREE.Vector3().crossVectors(faceNormal.clone().negate(), dialUp).normalize();
+      const rest = Math.atan2(drawn.dot(right), drawn.dot(dialUp));
+      const parent = hand.parent;
+      const pivotLocal = parent.worldToLocal(centre.clone());
+      // A hand that cannot be measured is left alone: still on the clock, just not turning.
+      if (!Number.isFinite(rest) || !Number.isFinite(pivotLocal.length())) continue;
+      const pivot = new THREE.Group();
+      pivot.name = name.replace('ANIM_', 'PIVOT_');
+      parent.add(pivot);
+      parent.updateMatrixWorld(true);
+      pivot.position.copy(pivotLocal);
+      pivot.attach(hand);
+      pivot.updateMatrixWorld(true);
+      // Slide the hand along its own length until that base meets the centre, so the shape swings
+      // from the middle of the clock instead of orbiting it. Two guards, because a hand a few
+      // centimetres long cannot need a longer slide, and a slide that does not lie in the dial plane
+      // means the geometry was measured on the wrong axis: either way the hand is better left where
+      // it is than thrown off the clock.
+      // Nudge the hand along the dial until that base meets the centre — but only within the dial
+      // plane: the clock body's centre sits a couple of centimetres behind the dial, so the raw
+      // offset is mostly a push into the wall, which is neither wanted nor visible.
+      const slide = centre.clone().sub(base);
+      slide.addScaledVector(faceNormal, -slide.dot(faceNormal));
+      slide.applyQuaternion(pivot.getWorldQuaternion(new THREE.Quaternion()).invert());
+      slide.divide(pivot.getWorldScale(new THREE.Vector3()));
+      const length = slide.length();
+      if (Number.isFinite(length) && length > .0005 && length < .08
+        && Math.abs(slide.dot(faceNormal)) < length * .2) {
+        hand.position.add(slide);
+        pivot.updateMatrixWorld(true);
+      }
+      const local = faceNormal.applyQuaternion(pivot.getWorldQuaternion(new THREE.Quaternion()).invert());
+      const axis = Math.abs(local.x) >= Math.abs(local.y) && Math.abs(local.x) >= Math.abs(local.z) ? 'x'
+        : Math.abs(local.y) >= Math.abs(local.z) ? 'y' : 'z';
+      clockHands.push({pivot, axis, sign: local[axis] < 0 ? -1 : 1, period, rest});
+    }
+  }
   // One soft radial sprite drives every additive halo in the room.
   const haloTexture = (() => {
     const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
@@ -220,6 +306,10 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
       }
       // The globe fades up once and then stays: a steady, faint land glow, not another switch.
       for(const g of globeLand)g.mat.emissiveIntensity=THREE.MathUtils.damp(g.mat.emissiveIntensity,g.strength,1.2,dt);
+      // Clock hands: the hour hand creeps along with the minutes, so the two read as one mechanism
+      // rather than as two independent dials. `rest` is the angle the model drew the hand at, which
+      // the dial has to read as its own zero.
+      for(const c of clockHands)c.pivot.rotation[c.axis]=-c.sign*((state.time%c.period)/c.period*Math.PI*2-c.rest);
       // Neon strip: every bulb carries its own material and halo, so the whole run reacts
       // to the colour picker, the auto hue cycle, the blink rate and the chase. The rainbow
       // ramp gives each bulb its own hue, so the chase travels through a colour gradient.

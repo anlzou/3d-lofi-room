@@ -639,8 +639,12 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
   life.update(0);
   const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();
   let downX=0,downY=0;
-  renderer.domElement.addEventListener('pointerdown',e=>{downX=e.clientX;downY=e.clientY;});
-  renderer.domElement.addEventListener('pointerup',e=>{
+  // The tap test listens where the controls grabbed the pointer, not on the canvas: OrbitControls
+  // captures the pointer on its own domElement, so a release only ever fires there — which is how
+  // clicking a model in the room quietly stopped working. The raycast still measures against the
+  // canvas, since that is the rectangle the camera's projection maps onto.
+  app.addEventListener('pointerdown',e=>{downX=e.clientX;downY=e.clientY;});
+  app.addEventListener('pointerup',e=>{
     if(e.button!==0||Math.hypot(e.clientX-downX,e.clientY-downY)>5)return;
     const box=renderer.domElement.getBoundingClientRect();pointer.set((e.clientX-box.left)/box.width*2-1,-(e.clientY-box.top)/box.height*2+1);
     ray.setFromCamera(pointer,camera);
