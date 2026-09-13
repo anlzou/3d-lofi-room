@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {restoreState,legalWeather,seasons,weathers,lightKeys,daylightAt,showcaseAt,rainbowHue,crossedMidnight,nextShowcaseDay,showcaseStrip} from '../src/world-state.ts';
+import {restoreState,legalWeather,seasons,weathers,lightKeys,daylightAt,showcaseAt,rainbowHue,crossedMidnight,nextShowcaseDay,showcaseStrip,fanButtonLamp} from '../src/world-state.ts';
 test('corrupt storage and untrusted values keep safe defaults',()=>{
   for(const raw of [null,42,'bad',{}, {schemaVersion:1,time:Infinity,season:'bad',devices:null,audio:{enabled:true,masterVolume:9}}]){
     const s=restoreState(raw);assert.equal(s.season,'autumn');assert.equal(s.audio.enabled,false);assert(Number.isFinite(s.time));assert(s.audio.masterVolume<=1);
@@ -166,4 +166,34 @@ test('each showcase day steps to the next season with legal, different weather',
   const pick=nextShowcaseDay('spring','snow',0);
   assert.equal(pick.weather,legalWeather('spring',pick.weather));
   assert.equal(nextShowcaseDay('winter','storm',0).weather,nextShowcaseDay('winter','storm',0).weather,'the roll decides, so it is repeatable');
+});
+test('the fan base row lights the button that matches the state',()=>{
+  // Read left to right across the base: slow, fast, then the red stop button.
+  assert.deepEqual(fanButtonLamp(1),{button:0,color:'#ffb259',intensity:1.1});
+  assert.deepEqual(fanButtonLamp(2),{button:1,color:'#ffb259',intensity:1.7});
+  assert.deepEqual(fanButtonLamp(0),{button:2,color:'#ff3516',intensity:.9});
+  // Stopped is the only red one, and the faster speed is the brighter one.
+  assert.notEqual(fanButtonLamp(0).color,fanButtonLamp(1).color);
+  assert(fanButtonLamp(2).intensity>fanButtonLamp(1).intensity);
+  for(const speed of [0,1,2] as const){
+    const lamp=fanButtonLamp(speed);
+    assert([0,1,2].includes(lamp.button),'the row only has three buttons');
+    assert(lamp.intensity>0,'the lit button has to actually light up');
+  }
+});
+test('风扇只有档位一个开关',()=>{
+  // 摇头 is what a running fan does, so there is no second switch to store or restore.
+  assert.equal('fanOscillate' in restoreState(null).devices,false);
+  const stored=restoreState({schemaVersion:2,devices:{fanSpeed:2,fanOscillate:false}}).devices;
+  assert.equal(stored.fanSpeed,2);
+  assert.equal('fanOscillate' in stored,false,'a save from when the switch existed still loads, it just drops the field');
+  for(const [raw,expected] of [[0,0],[1,1],[2,2],[3,0],['x',0],[null,0]] as const)
+    assert.equal(restoreState({schemaVersion:2,devices:{fanSpeed:raw}}).devices.fanSpeed,expected);
+});
+test('展示模式 gives the fan the summer afternoon and nothing else',()=>{
+  assert.equal(showcaseAt(14,'summer').devices.fanSpeed,2);
+  assert.equal(showcaseAt(10,'summer').devices.fanSpeed,1);
+  assert.equal(showcaseAt(20,'summer').devices.fanSpeed,0);
+  for(const season of ['spring','autumn','winter'] as const)
+    for(const h of [0,10,14,20])assert.equal(showcaseAt(h,season).devices.fanSpeed,0,`${season} ${h}:00`);
 });

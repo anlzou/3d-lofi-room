@@ -12,7 +12,9 @@ export const seasonMottos: Record<Season, string> = { spring:'新绿', summer:'�
 export const weatherLabels: Record<Weather, string> = { clear:'晴', cloudy:'多云', overcast:'阴天', drizzle:'细雨', rain:'雨', storm:'雷雨', fog:'雾', snow:'雪', windy:'风' };
 
 export interface WorldState {
-  schemaVersion: 1;
+  // 2 is what this build writes; 1 is still read, because saves from before the fan's 摇头
+  // switch existed carry it (see restoreState).
+  schemaVersion: 1 | 2;
   season: Season;
   time: number;
   weather: Weather;
@@ -70,6 +72,8 @@ export function showcaseAt(hour: number, season: Season, weather: Weather = 'cle
   const dark = daylight < .35;
   const home = h >= 6.6 && h < 8.6 || h >= 17.6 || h < 1;
   const wet = weather === 'rain' || weather === 'storm' || weather === 'drizzle' || weather === 'snow' || weather === 'fog';
+  // A fan left running in a hot afternoon is being ignored, and a running fan sways on its own.
+  const fanSpeed: 0 | 1 | 2 = season === 'summer' ? (h >= 12 && h < 16 ? 2 : h >= 9 && h < 18 ? 1 : 0) : 0;
   return {
     id: step.id, label: step.label,
     devices: {
@@ -83,14 +87,14 @@ export function showcaseAt(hour: number, season: Season, weather: Weather = 'cle
       // The window is aired on a warm dry afternoon and shut otherwise.
       windowOpen: season !== 'winter' && !wet && h >= 9 && h < 18,
       heater: season === 'winter' && daylight < .35 && home,
-      fanSpeed: season === 'summer' ? (h >= 12 && h < 16 ? 2 : h >= 9 && h < 18 ? 1 : 0) : 0,
+      fanSpeed,
     },
   };
 }
 export function restoreState(raw: unknown, query = ''): WorldState {
   const d = createDefaultState();
   const r = raw && typeof raw === 'object' ? raw as Partial<WorldState> : {};
-  if (r.schemaVersion === 1) {
+  if (r.schemaVersion === 1 || r.schemaVersion === 2) {
     if (seasons.includes(r.season!)) d.season = r.season!;
     if (weathers.includes(r.weather!)) d.weather = r.weather!;
     if (Number.isFinite(r.time)) d.time = ((r.time! % 24) + 24) % 24;
@@ -128,7 +132,7 @@ export function createDefaultState(): WorldState {
   return {
     // 展示模式 is on out of the box: a first visit opens on a room that is already living its
     // own day, starting late morning so there is light to see it by.
-    schemaVersion: 1, season: 'autumn', time: 11 + 30 / 60, weather: 'clear', autopilot: false, showcase: true,
+    schemaVersion: 2, season: 'autumn', time: 11 + 30 / 60, weather: 'clear', autopilot: false, showcase: true,
     audio: { enabled: false, masterVolume: 0.12 }, camera: 'room',
     devices: { lamp: true, bedsideLamp:false, ceilingLamp:false, lavaLamp:false, stringLights:false, streetLamp:true, tv: true, mac: true, windowOpen: false, fanSpeed: 0, heater: false },
     levels: { lamp: 1, bedsideLamp: 1, ceilingLamp: 1, lavaLamp: 1, stringLights: 1, streetLamp: 1, mac: 1, tv: 1 },
@@ -162,4 +166,12 @@ export function nextShowcaseDay(season: Season, weather: Weather, roll: number):
   const options = weathers.filter(w => w !== weather && legalWeather(nextSeason, w) === w);
   const picks = options.length ? options : weathers.filter(w => legalWeather(nextSeason, w) === w);
   return { season: nextSeason, weather: picks[Math.floor(roll * picks.length) % picks.length] };
+}
+// The fan's base carries three buttons read left to right from the room: the two cream ones
+// pick the speeds and the red one on the right stops it. Only one lights at a time, so the
+// row doubles as the fan's state readout while the slider panel is closed.
+export interface FanButtonLamp { button: number; color: string; intensity: number }
+export function fanButtonLamp(speed: 0 | 1 | 2): FanButtonLamp {
+  if (speed === 0) return { button: 2, color: '#ff3516', intensity: .9 };
+  return speed === 1 ? { button: 0, color: '#ffb259', intensity: 1.1 } : { button: 1, color: '#ffb259', intensity: 1.7 };
 }

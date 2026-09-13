@@ -17,7 +17,7 @@ export function roomControls(onChange: () => void) {
     </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></section>
     <section class="panel-card"><h2>声音</h2><div class="panel-buttons"><button id="sound">开启环境声</button><button id="music" aria-pressed="false">播放窗边留座 ♫</button><button id="chime" aria-pressed="false">风铃声 · 关</button></div>
     <label class="volume-row">音量<input id="volume" aria-label="音量" type="range" min="0" max="1" step=".01" /></label></section></div>`;
-  document.querySelector('.console')!.append(panel);
+  document.querySelector('.console-body')!.append(panel);
   const select = <T extends HTMLElement>(s: string) => panel.querySelector<T>(s)!;
   const save = () => { try { localStorage.setItem('lofi-room-v1',JSON.stringify(state)); } catch { /* Nonessential persistence. */ } };
   const sync = () => {

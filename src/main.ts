@@ -12,6 +12,7 @@ import { loadingProgress } from './loading';
 import { frameGovernor, pixelRatioFor, bufferRatio } from './perf-governor';
 import { roomLife } from './room-life';
 import { legalWeather, lightLabels, lightKeys, daylightAt, showcaseAt, crossedMidnight, nextShowcaseDay, showcaseStrip, seasonLabels, seasonMottos, weatherLabels, type WorldState } from './world-state';
+import { hitDevice } from './device-hit';
 import {touchFeedback} from './touch-feedback';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
@@ -84,7 +85,10 @@ let touch:ReturnType<typeof touchFeedback>|undefined;
 const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
 // Meshes kept out of static batching because their material is driven at runtime:
 // the pendant and bedside shades glow on demand, and every string-light bulb animates.
-const dynamicMesh = /^(Ceiling_Shade|Nightlight_Shade|Exterior_StreetLamp_Lens_[FB]|StringLights_Bulb_\d+)$/;
+// GLTFLoader drops the dots in Blender's .001 suffixes, so the fan buttons arrive as
+// Fan_BaseButton / Fan_BaseButton001 / Fan_BaseButton002. All three must stay unbatched to
+// light up on their own (see room-life).
+const dynamicMesh = /^(Ceiling_Shade|Nightlight_Shade|Exterior_StreetLamp_Lens_[FB]|StringLights_(Bulb_\d+|Wire)|Fan_BaseButton[\d.]*)$/;
 let ceilingLight: THREE.PointLight | undefined;
 let lavaLight: THREE.PointLight | undefined;
 const streetLights: THREE.PointLight[] = [];
@@ -577,16 +581,7 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
     if(!hit)return;
     const names:string[]=[];for(let p:THREE.Object3D|null=hit.object;p;p=p.parent)names.push(p.name);
     const feedback=touch?.activate(names);if(feedback){settings.sync();settings.save();status.textContent=feedback;refreshShadows();return;}
-    let obj:THREE.Object3D|null=hit.object,key:'tv'|'mac'|'lamp'|'heater'|'ceilingLamp'|'lavaLamp'|undefined;
-    while(obj){
-      if(obj.name==='INT_tv_crt'||obj.name==='EMIT_screen_crt')key='tv';
-      if(obj.name==='INT_mac'||obj.name==='EMIT_screen_mac')key='mac';
-      if(obj.name==='INT_lamp_desk')key='lamp';
-      if(obj.name==='SEASON_winter_heater')key='heater';
-      if(obj.name==='INT_ceiling_pullcord'||obj.name==='Ceiling_Shade')key='ceilingLamp';
-      if(obj.name==='INT_lava_lamp')key='lavaLamp';
-      obj=obj.parent;
-    }
+    const key=hitDevice(names);
     if(key){settings.state.devices[key]=!settings.state.devices[key];settings.sync();settings.save();updateLight();status.textContent=`${key==='heater'?'暖炉':lightLabels[key]}已${settings.state.devices[key]?'开启':'关闭'}`;}
   });
   loaded = true;
@@ -602,9 +597,12 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
   finishProgress();
   clearInterval(slowNetworkWatch);
   status.classList.remove('error');
+  // Once the room is up, say how to get into it: the ring opens the console, and the room itself
+  // answers to clicks. The line is deliberately short — 展示模式 starts announcing its routine here.
+  const readyHint = '拖动旋转 · 点底部圆环开控制面板，也可直接点房间里的模型互动';
   status.textContent = settings.state.showcase
-    ? '房间已就绪 · 展示模式进行中（可按「展示模式」接管）· 拖动旋转，滚轮缩放'
-    : '房间已就绪 · 拖动旋转，滚轮缩放';
+    ? `房间已就绪 · 展示模式进行中（可按「展示模式」接管）· ${readyHint}`
+    : `房间已就绪 · ${readyHint}`;
   console.info('[lofi] GLB loaded', JSON.stringify({ triangles, meshes, shadowRefreshCalls, steadyCalls: renderer.info.render.calls, clockSegments: clockSegments.length, fan: !!fanBlades, sleepMarks: sleepMarks.length }));
 };
 // Both downloads start here, and the room is assembled once the model has landed.

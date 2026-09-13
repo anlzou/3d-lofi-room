@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import type { WorldState } from './world-state';
-import {rainbowHue} from './world-state';
+import {fanButtonLamp, rainbowHue} from './world-state';
 import type {LightFadeKey} from './light-fade';
 import {eventClock} from './events';
 import {audioActivity} from './audio-activity';
@@ -45,6 +45,29 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
     for(const block of wax)block.material=m;
     lavaGlow.push({mat:m,strength:1.2});
   }
+  // The fan's base carries its physical switch row: the two cream buttons pick the speeds
+  // and the red one stops it. They sit outside the fan root and share their Blender
+  // materials with 200+ props, so each gets its own clone (keeping the baked lightmap
+  // shader) and main.ts keeps them out of the static batch. One of them lights per state.
+  const fanButtons:THREE.MeshStandardMaterial[]=[];
+  {
+    const meshes:THREE.Mesh[]=[];
+    root.traverse(o=>{if(o instanceof THREE.Mesh&&/^Fan_BaseButton/.test(o.name)&&!Array.isArray(o.material))meshes.push(o);});
+    // Read the row the way the room sees it: left to right across the base.
+    const places=meshes.map(mesh=>({mesh,x:new THREE.Box3().setFromObject(mesh).getCenter(new THREE.Vector3()).x}));
+    places.sort((a,b)=>a.x-b.x);
+    for(const {mesh} of places){
+      const original=mesh.material as THREE.MeshStandardMaterial,m=original.clone();
+      m.onBeforeCompile=original.onBeforeCompile;m.customProgramCacheKey=original.customProgramCacheKey;
+      m.emissive.set('#000000');m.emissiveIntensity=0;m.toneMapped=false;
+      mesh.material=m;fanButtons.push(m);
+    }
+  }
+  // 摇头 is part of running the fan rather than a switch of its own: the head sways while the
+  // blades turn, wider and quicker with each speed, and eases back to centre when it stops.
+  const fanHead=root.getObjectByName('ANIM_fan_head');
+  const fanSwing=[0,.5,.62],fanRate=[.55,.55,.8];
+  let fanSway=0,fanPhase=0;
   // One soft radial sprite drives every additive halo in the room.
   const haloTexture = (() => {
     const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
@@ -165,6 +188,19 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
       if(streetHalo)streetHalo.visible=streetLevel>0;
       if(streetHaloColors){const warm=streetLevel*streetLevel;for(let i=0;i<streetHaloColors.count;i++)streetHaloColors.setXYZ(i,warm*.96,warm*.54,warm*.22);streetHaloColors.needsUpdate=true;}
       for(const m of lavaGlow)m.mat.emissiveIntensity=THREE.MathUtils.damp(m.mat.emissiveIntensity,m.strength*state.levels.lavaLamp*fade('lavaLamp'),3,dt);
+      // Fan: the head sweeps while it runs, and the base row reads back the state — red on the
+      // stop button when it is still, amber on whichever speed button is holding it on.
+      if(fanHead){
+        const speed=state.devices.fanSpeed;
+        fanSway=THREE.MathUtils.damp(fanSway,speed?fanSwing[speed]:0,2.2,dt);
+        fanPhase+=dt*fanRate[speed||1];
+        fanHead.rotation.y=Math.sin(fanPhase)*fanSway;
+      }
+      const lit=fanButtonLamp(state.devices.fanSpeed);
+      for(const [i,m] of fanButtons.entries()){
+        if(i===lit.button)m.emissive.set(lit.color);
+        m.emissiveIntensity=THREE.MathUtils.damp(m.emissiveIntensity,i===lit.button?lit.intensity:0,6,dt);
+      }
       // Neon strip: every bulb carries its own material and halo, so the whole run reacts
       // to the colour picker, the auto hue cycle, the blink rate and the chase. The rainbow
       // ramp gives each bulb its own hue, so the chase travels through a colour gradient.

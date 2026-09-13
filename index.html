@@ -27,8 +27,8 @@
     <button id="dock-toggle" class="dock-ring" data-drag-handle aria-expanded="false" aria-controls="dock" aria-label="展开或收起控制面板" title="点击展开 · 拖动移动"></button>
     <section class="console" aria-label="房间控制">
       <div class="console-title"><span>◉ ROOM CONTROL</span><span class="fine">一段不着急的时光</span><button id="console-reset" class="console-reset" title="控制面板回到默认位置" aria-label="控制面板回到默认位置">⟲</button></div>
-      <div class="time-control"><label for="time">时刻</label><span>00</span><input id="time" type="range" min="0" max="23.99" step="0.01" value="11.5" aria-label="时刻" /><span>24</span></div>
-      <div class="actions"><button id="pause" aria-pressed="false">▷ 时间流动</button><button id="showcase" aria-pressed="false" title="随时间自动开灯关灯，模拟一天的作息">展示模式</button><label class="camera-label">机位<select id="camera" aria-label="机位"><option value="room">01 全景</option><option value="desk">02 桌面</option><option value="window">03 窗边</option><option value="tv">04 电视</option></select></label><button id="fullscreen">全屏 ↗</button><button id="hide" title="按 H 或双击画面恢复">隐藏 H</button></div>
+      <div class="console-body"><div class="time-control"><label for="time">时刻</label><span>00</span><input id="time" type="range" min="0" max="23.99" step="0.01" value="11.5" aria-label="时刻" /><span>24</span></div>
+      <div class="actions"><button id="pause" aria-pressed="false">▷ 时间流动</button><button id="showcase" aria-pressed="false" title="随时间自动开灯关灯，模拟一天的作息">展示模式</button><label class="camera-label">机位<select id="camera" aria-label="机位"><option value="room">01 全景</option><option value="desk">02 桌面</option><option value="window">03 窗边</option><option value="tv">04 电视</option></select></label><button id="fullscreen">全屏 ↗</button><button id="hide" title="按 H 或双击画面恢复">隐藏 H</button></div></div>
     </section>
   </div>
   <footer class="ui"><div class="status-left"><span id="status" role="status">正在打开房间…</span><progress id="load-progress" max="100" value="0" aria-label="加载进度" hidden></progress><button id="retry" type="button" hidden>重试 ↻</button></div><span id="stats"></span></footer>
