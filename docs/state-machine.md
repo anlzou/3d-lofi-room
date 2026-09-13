@@ -36,6 +36,10 @@
 
 太阳阴影用 `sun-shadow.ts` 的 `sunShadowClock` 控制重建时机：`shadowAngleStep = 0.0035` rad（约 0.2° 太阳行程，在主机位约 1.4 像素）保证每一步都看不出跳变，`shadowMinInterval = 1/24` 秒是上限保护（拖动时刻滑块时不会把帧预算全花在阴影上）。太阳高度接近地平线（`daylight ≤ .05`）时不重建，天亮后第一次检查必然重建。太阳与台灯各自的 `shadow.autoUpdate` 都关掉，逐帧的太阳重建只设 `sun.shadow.needsUpdate`，跳过台灯那张 512² 阴影图；只有换灯或场景变化才由 `refreshShadows()` 一次重建两张。
 
+晨曦与夕阳是两条色路，不是一条曲线：`updateLight()` 里 `rising = hour < 12`，太阳色从 `noon` 向 `#ffd2a6`（粉桃）或 `#ff9450`（橙红）收敛，月光蓝只在日照真的退去后才介入（`1 - smoothstep(daylight, 0, .35)`，否则两支黄金时段都会被冲淡成同一种粉）；天空背景向 `#c2877c` / `#9d5836` 收敛，半球光上色向 `#ffd9cd` / `#ffb077`、下色向 `#75503a` 走，冷补光强度随 `gold` 从 0.45 退到 0.25（满蓝会把黄金时段平均掉）。`gold = 1 - smoothstep(height, .1, .65)` 仍是黄金时段的权重。低太阳时 `sun.position.y = 1 + max(.08,|h|)*5.9`（地平线约 1.47 m，正午约 6.9 m），掠射角带来铺满地板的长影。四时段间接光烘焙（night / dawn / noon / dusk）不变，换的是直射光、天空和补光的配比。
+
+设备与光照之外还有两条容易踩的运行时约定：**静态合批**（`main.ts` 里 `dynamicMesh` / `dynamicMeshParent` / `droppedMesh` 三张排除表）会把 `ANIM_*` 下的网格合并成 `StaticBatch_<材质名>` 并隐藏源网格，使用的却是合批当时的原始材质——任何「运行时给某个网格换材质或改自发光」的东西都必须先出现在排除表里，否则改的是一份不会被绘制的副本（地球仪陆地的微光与风扇按键都栽在这上面）。**视口尺寸**只在 `resize()` 里更新且该函数幂等，`fullscreenchange` / `orientationchange` / `visualViewport.resize` 都会触发它并连补三帧；OrbitControls 绑在满屏的 `#app` 而不是画布上，所以手机刚进全屏、画布尺寸还没跟上的那一两帧里，拖动依然有效。
+
 设置存 localStorage，带 schemaVersion；读取进行类型、范围和天气合法性校验。URL 参数 season/time/weather 覆盖已保存值。损坏存储回到默认值；读写失败不阻断画面。
 
 ## 交互与声音

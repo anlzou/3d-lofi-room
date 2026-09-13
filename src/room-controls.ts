@@ -1,5 +1,6 @@
 import { restoreState, legalWeather, seasons, weathers, seasonLabels, seasonMottos, weatherLabels, lightKeys, lightLabels, type Season, type Weather, type LightKey } from './world-state';
 import {audioActivity} from './audio-activity';
+import {dropdown} from './dropdown';
 export function roomControls(onChange: () => void) {
   let raw: unknown;
   try { raw = JSON.parse(localStorage.getItem('lofi-room-v1') ?? 'null'); } catch { /* Private storage may be unavailable. */ }
@@ -12,17 +13,24 @@ export function roomControls(onChange: () => void) {
     <section class="panel-card"><h2>灯光</h2>${rows(['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp'])}</section>
     <section class="panel-card"><h2>屏幕</h2>${rows(['mac','tv'])}</section>
     <section class="panel-card"><h2>环境</h2><div class="panel-pair">
-    <label>季节<select aria-label="季节" id="season">${seasons.map(s => `<option value="${s}">${seasonLabels[s]} · ${seasonMottos[s]}</option>`).join('')}</select></label>
-    <label>窗外<select aria-label="天气" id="weather">${weathers.map(w => `<option value="${w}">${weatherLabels[w]}</option>`).join('')}</select></label>
+    <label>季节<span class="dropdown" id="season-drop"></span></label>
+    <label>窗外<span class="dropdown" id="weather-drop"></span></label>
     </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></section>
     <section class="panel-card"><h2>声音</h2><div class="panel-buttons"><button id="sound">开启环境声</button><button id="music" aria-pressed="false">播放窗边留座 ♫</button><button id="chime" aria-pressed="false">风铃声 · 关</button></div>
     <label class="volume-row">音量<input id="volume" aria-label="音量" type="range" min="0" max="1" step=".01" /></label></section></div>`;
   document.querySelector('.console-body')!.append(panel);
   const select = <T extends HTMLElement>(s: string) => panel.querySelector<T>(s)!;
+  // Season and weather pick their lists in-page too, so the whole console keeps one popup style.
+  const seasonDrop = dropdown(select('#season-drop'), seasons.map(s => ({ value: s, label: `${seasonLabels[s]} · ${seasonMottos[s]}` })), state.season, value => {
+    state.season = value; state.autopilot = false; state.weather = legalWeather(state.season, state.weather); changed();
+  }, '季节');
+  const weatherDrop = dropdown(select('#weather-drop'), weathers.map(w => ({ value: w, label: weatherLabels[w] })), state.weather, value => {
+    state.weather = legalWeather(state.season, value); changed();
+  }, '天气');
   const save = () => { try { localStorage.setItem('lofi-room-v1',JSON.stringify(state)); } catch { /* Nonessential persistence. */ } };
   const sync = () => {
-    select<HTMLSelectElement>('#season').value = state.season;
-    select<HTMLSelectElement>('#weather').value = state.weather;
+    seasonDrop.set(state.season);
+    weatherDrop.set(state.weather);
     panel.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(b => {
       const on = state.devices[b.dataset.device as 'lamp']; b.setAttribute('aria-pressed',String(on));
     });
@@ -46,8 +54,6 @@ export function roomControls(onChange: () => void) {
     document.querySelector('#season-label')!.textContent = `${state.season.toUpperCase()}, 2026`;
   };
   const changed = () => { sync(); save(); onChange(); };
-  select('#season').addEventListener('change', e => { state.season=(e.target as HTMLSelectElement).value as Season;state.autopilot=false;state.weather=legalWeather(state.season,state.weather);changed(); });
-  select('#weather').addEventListener('change', e => { state.weather=legalWeather(state.season,(e.target as HTMLSelectElement).value as Weather);changed(); });
   panel.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(b => b.onclick=()=>{const k=b.dataset.device as 'lamp';state.devices[k]=!state.devices[k];changed();});
   panel.querySelectorAll<HTMLInputElement>('[data-level]').forEach(input => input.oninput=()=>{state.levels[input.dataset.level as LightKey]=Number(input.value)/100;changed();});
   select<HTMLInputElement>('[data-color="stringLights"]').oninput=e=>{state.strip.color=(e.target as HTMLInputElement).value.toLowerCase();changed();};

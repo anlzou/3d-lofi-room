@@ -13,6 +13,7 @@ import { frameGovernor, pixelRatioFor, bufferRatio } from './perf-governor';
 import { roomLife } from './room-life';
 import { legalWeather, lightLabels, lightKeys, daylightAt, showcaseAt, crossedMidnight, nextShowcaseDay, showcaseStrip, seasonLabels, seasonMottos, weatherLabels, type WorldState } from './world-state';
 import { hitDevice } from './device-hit';
+import { dropdown } from './dropdown';
 import {touchFeedback} from './touch-feedback';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
@@ -54,7 +55,7 @@ const clock = document.querySelector<HTMLOutputElement>('#clock')!;
 const phase = document.querySelector<HTMLElement>('#day-label')!;
 const pause = document.querySelector<HTMLButtonElement>('#pause')!;
 const stats = document.querySelector<HTMLElement>('#stats')!;
-const cameraSelect = document.querySelector<HTMLSelectElement>('#camera')!;
+const cameraHost = document.querySelector<HTMLElement>('#camera-drop')!;
 const fullscreen = document.querySelector<HTMLButtonElement>('#fullscreen')!;
 let hour = 11 + 30 / 60;
 // Last minute written to the clock, so an unchanged clock or phase is not rewritten per frame.
@@ -79,7 +80,6 @@ dockToggle.addEventListener('pointerdown', () => ringPressed(true));
 document.addEventListener('pointerup', () => ringPressed(false), true);
 document.addEventListener('pointercancel', () => ringPressed(false), true);
 hour=settings.state.time;
-cameraSelect.value=settings.state.camera;
 let life: ReturnType<typeof roomLife> | undefined;
 let touch:ReturnType<typeof touchFeedback>|undefined;
 const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
@@ -89,10 +89,26 @@ const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
 // Fan_BaseButton / Fan_BaseButton001 / Fan_BaseButton002. All three must stay unbatched to
 // light up on their own (see room-life).
 const dynamicMesh = /^(Ceiling_Shade|Nightlight_Shade|Exterior_StreetLamp_Lens_[FB]|StringLights_(Bulb_\d+|Wire)|Fan_BaseButton[\d.]*)$/;
+// A multi-material object arrives as a group with one child mesh per primitive, so the globe's
+// continents are children of Globe_Sphere rather than a name of their own. Their material is
+// driven at runtime too, so the whole sphere stays unbatched: three small meshes, and the land
+// keeps a glow that batching would otherwise throw away with the hidden source meshes.
+const dynamicMeshParent = /^Globe_Sphere[\d.]*$/;
+// The globe's three latitude rings are dropped outright: at this size they read as loose circles
+// floating around the sphere instead of part of it. The Blender source keeps them (AGENTS.md makes
+// it the source of truth), so deleting them there later needs nothing changed here.
+const droppedMesh = /^Globe_Parallel[\d.]*$/;
+// The globe's three latitude rings read as clutter on such a low-poly sphere, so the web build
+// hides them. They stay out of static batching to remain addressable by name — a batch is built
+// from their geometry and hides the sources, leaving nothing to switch off. Delete them in
+// Blender and re-export to drop the geometry for good.
+const hiddenMesh = /^Globe_Parallel[\d.]*$/;
 let ceilingLight: THREE.PointLight | undefined;
 let lavaLight: THREE.PointLight | undefined;
 const streetLights: THREE.PointLight[] = [];
 let weatherDim=1;
+// The last size the renderer was told about, so repeated resize events cost nothing.
+let resizedWidth=0,resizedHeight=0;
 let playing = false;
 let loaded = false;
 let frame = 0;
@@ -134,7 +150,11 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 // every other map only when something in the room actually changed (see refreshShadows).
 renderer.shadowMap.autoUpdate = false;
 app.appendChild(renderer.domElement);
-const controls = new OrbitControls(camera, renderer.domElement);
+// Bound to the fixed, full-viewport wrapper rather than the canvas: a phone that has just gone
+// fullscreen can still be reporting the old size for a frame or two, and a drag on the uncovered
+// strip would otherwise land on nothing at all. The wrapper is a sibling of every panel, so
+// touching the room always rotates it and touching the console never does.
+const controls = new OrbitControls(camera, app);
 controls.enableDamping = true;
 controls.enablePan = false;
 controls.minDistance = 2;
@@ -150,10 +170,11 @@ const presets = {
   tv: { position: [-.53, 1.09, 2.65], target: [-1.67, .77, 1.01], fov: 34 },
 };
 function setCamera() {
-  const p = presets[cameraSelect.value as keyof typeof presets] ?? presets.room;
+  const choice = settings.state.camera;
+  const p = presets[choice] ?? presets.room;
   controls.target.fromArray(p.target);
   camera.position.fromArray(p.position);
-  if (innerWidth < 650 && cameraSelect.value === 'room') {
+  if (innerWidth < 650 && choice === 'room') {
     camera.position.sub(controls.target).multiplyScalar(1.35).add(controls.target);
   }
   camera.fov = p.fov;
@@ -161,8 +182,20 @@ function setCamera() {
   camera.updateProjectionMatrix();
   controls.update();
 }
+// The camera list opens inside the page: the native select popup is drawn by the system and takes
+// over the screen on phones, which looks nothing like the console around it.
+const cameraChoices: { value: WorldState['camera']; label: string }[] = [
+  { value: 'room', label: '01 全景' },
+  { value: 'desk', label: '02 桌面' },
+  { value: 'window', label: '03 窗边' },
+  { value: 'tv', label: '04 电视' },
+];
+dropdown<WorldState['camera']>(cameraHost, cameraChoices, settings.state.camera, value => {
+  settings.state.camera = value;
+  settings.save();
+  setCamera();
+}, '机位');
 setCamera();
-cameraSelect.addEventListener('change', () => { setCamera();settings.state.camera=cameraSelect.value as 'room';settings.save(); });
 const ambient = new THREE.HemisphereLight('#d4deed', '#665044', 1.2);
 scene.add(ambient);
 const sun = new THREE.DirectionalLight('#ffcd93', 2);
@@ -202,10 +235,28 @@ heaterGlow.position.set(.37, .26, -.16);
 scene.add(heaterGlow);
 const night = new THREE.Color('#181f33');
 const day = new THREE.Color('#8b959b');
-const sunset = new THREE.Color('#65544c');
-const warm = new THREE.Color('#ffba78');
+// 晨曦 and 夕阳 are not the same light. Sunrise comes up through the night's haze, so it reads
+// pinker, softer and a little cooler; by sunset the air has dried out and the same low angle
+// lands deeper, redder and heavier on the room.
+const sunriseSky = new THREE.Color('#c2877c');
+const sunsetSky = new THREE.Color('#9d5836');
+const dawnWarm = new THREE.Color('#ffd2a6');
+const duskWarm = new THREE.Color('#ff9450');
 const noon = new THREE.Color('#fff0d8');
 const moon = new THREE.Color('#91afff');
+// The hemisphere light is the room's own sky: its upper half carries the hour's colour and the
+// floor half bounces it back warm, so the whole room picks up the hour instead of only the sunlit
+// patches. These are the colours the window is filtering at that time.
+const skyDay = new THREE.Color('#d4deed');
+const skyDawn = new THREE.Color('#ffd9cd');
+const skyDusk = new THREE.Color('#ffb077');
+const skyNight = new THREE.Color('#3a4460');
+const groundDay = new THREE.Color('#665044');
+const groundGold = new THREE.Color('#75503a');
+// The cool bounce keeps the shadowed side from going flat, so it stays blue — but it steps back
+// as the sun drops, because a full-strength blue fill averages the golden hour away.
+const fillDay = new THREE.Color('#a8c7ff');
+const fillGold = new THREE.Color('#86a8ff');
 function updateLight() {
   baked?.update(hour);
   const angle = ((hour - 6) / 12) * Math.PI;
@@ -220,11 +271,22 @@ function updateLight() {
     sun.shadow.needsUpdate = true;
   }
   const gold = 1 - THREE.MathUtils.smoothstep(height, .1, .65);
-  sun.position.set(Math.cos(angle) * 4, 1 + Math.max(.13, Math.abs(height)) * 6, -5);
-  sun.color.copy(noon).lerp(warm, gold).lerp(moon, 1 - daylight);
+  // Dawn on the way up, dusk on the way down: the same geometry, two different skies.
+  const rising = hour < 12;
+  // A low sun also sits lower in the sky, so its light comes in flatter through the window: the
+  // golden hour throws shadows the length of the floor instead of the short midday ones.
+  sun.position.set(Math.cos(angle) * 4, 1 + Math.max(.08, Math.abs(height)) * 5.9, -5);
+  // The moon tint only steps in once the sun is genuinely going out: mixing it in from the start
+  // of the golden hour washes the dawn peach and the dusk orange back toward blue.
+  // The moonlight tint belongs only to a sun that is going out: mixing it in as soon as daylight
+  // starts to fall washes both golden hours out to the same pink and costs the sunset its orange.
+  sun.color.copy(noon).lerp(rising ? dawnWarm : duskWarm, gold).lerp(moon, 1 - THREE.MathUtils.smoothstep(daylight, 0, .35));
   sun.intensity = daylight * (1.8 + Math.max(0, height)) * weatherDim;
-  ambient.intensity = daylight * 1.0;
-  fill.intensity = daylight * .45;
+  ambient.color.copy(skyDay).lerp(rising ? skyDawn : skyDusk, gold).lerp(skyNight, 1 - daylight);
+  ambient.groundColor.copy(groundDay).lerp(groundGold, gold);
+  ambient.intensity = daylight * (1 + gold * .12);
+  fill.color.copy(fillDay).lerp(fillGold, gold);
+  fill.intensity = daylight * (.45 - gold * .2);
   lamp.intensity = (2.5 + (1 - daylight) * 3.5) * settings.state.levels.lamp * fade.value('lamp');
   // The pendant hangs far above the room, so it needs a lot more output than the desk
   // lamp to read as "lights on" (measured on the room floor, not on its own shade).
@@ -235,7 +297,7 @@ function updateLight() {
   // The string-light strip owns its own light and blink timing in room-life.ts.
   heaterGlow.intensity = (.12 + (1 - daylight) * 1.35) * fade.value('heater');
   for(const s of screenLights)s.light.intensity=(s.tv?1.4:.6)*settings.state.levels[s.tv?'tv':'mac']*fade.value(s.tv?'tv':'mac');
-  (scene.background as THREE.Color).copy(day).lerp(sunset, gold * .7).lerp(night, 1 - daylight);
+  (scene.background as THREE.Color).copy(day).lerp(rising ? sunriseSky : sunsetSky, gold * .8).lerp(night, 1 - daylight);
   renderer.toneMappingExposure = 1;
   const minutes = Math.round(hour * 60) % 1440;
   // Writing to the DOM every frame is wasted work: the clock, the phase line and the slider
@@ -247,7 +309,7 @@ function updateLight() {
     for (const segment of clockSegments) {
       segment.visible = digitSegments[Number(digits[segment.userData.digit_index])].includes(segment.userData.segment);
     }
-    const label = hour < 5 || hour >= 20 ? '夜色 · NIGHT' : hour < 8 ? '晨光 · DAWN' : hour >= 16 ? '日落之前 · GOLDEN HOUR' : '日间 · DAYLIGHT';
+    const label = hour < 5 || hour >= 19.5 ? '夜色 · NIGHT' : hour < 8.5 ? '晨曦 · DAWN' : hour >= 16.5 ? '夕阳 · GOLDEN HOUR' : '日间 · DAYLIGHT';
     if (label !== phase.textContent) phase.textContent = label;
   }
   if (Math.abs(Number(slider.value) - hour) > .004) slider.value = String(hour);
@@ -505,7 +567,10 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
   gltf.scene.traverse((obj) => {
     if (!(obj instanceof THREE.Mesh) || Array.isArray(obj.material)) return;
     if (/^(INT_|ANIM_|EMIT_|SEASON_)/.test(obj.name) || obj.children.length || obj.userData.noShadow) return;
-    if (dynamicMesh.test(obj.name)) return;
+    if (dynamicMesh.test(obj.name) || dynamicMeshParent.test(obj.parent?.name ?? '')) return;
+    // Rings the room does without: handled before the batch so no copy of them is drawn either.
+    if (droppedMesh.test(obj.name)) { obj.visible = false; return; }
+    if (hiddenMesh.test(obj.name)) return;
     let owner: THREE.Object3D = scene;
     for (let p = obj.parent; p; p = p.parent) {
       if (/^(INT_|ANIM_|EMIT_|SEASON_)/.test(p.name)) { owner = p; break; }
@@ -531,6 +596,8 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
     for (const geometry of geometries) geometry.dispose();
   }
   for (const obj of sources) obj.visible = false;
+  // see hiddenMesh: the rings live on in the .blend, the runtime just does not draw them.
+  gltf.scene.traverse((obj) => { if (hiddenMesh.test(obj.name)) obj.visible = false; });
   // Eevee/Cycles lights stay in Blender. Runtime screen bounce follows exported faces.
   for (const name of ['EMIT_screen_mac', 'EMIT_screen_crt']) {
     const screen = gltf.scene.getObjectByName(name);
@@ -625,7 +692,11 @@ void (async () => {
     failLoading('房间加载失败 · 请检查网络后点击重试 ↻', error);
   }
 })();
-function resize() {
+function resize(force = false) {
+  // The URL bar, the keyboard and the fullscreen transition all fire this more than once for the
+  // same result: only the first one for a given size has work to do.
+  if (!force && innerWidth === resizedWidth && innerHeight === resizedHeight) return;
+  resizedWidth = innerWidth; resizedHeight = innerHeight;
   camera.aspect = innerWidth / innerHeight;
   camera.setViewOffset(innerWidth, innerHeight, 0, innerHeight * .055, innerWidth, innerHeight);
   camera.updateProjectionMatrix();
@@ -634,7 +705,20 @@ function resize() {
   renderer.setPixelRatio(bufferRatio(innerWidth, innerHeight, pixelRatioFor(innerWidth, innerHeight, devicePixelRatio || 1), governor.scale()));
   renderer.setSize(innerWidth, innerHeight);
 }
-window.addEventListener('resize', resize);
+window.addEventListener('resize', () => resize());
+// Entering fullscreen hides a phone's URL bar and turning the phone swaps the viewport, and Chrome
+// may still report the previous size inside the event itself, so settle it again on the next
+// frames. Rotating the phone is the case that matters most: without it the canvas keeps the old
+// orientation's shape and the room looks — and drags — broken.
+const settleViewport = () => {
+  resize(true);
+  requestAnimationFrame(() => { resize(true); requestAnimationFrame(() => resize(true)); });
+};
+window.addEventListener('orientationchange', settleViewport);
+document.addEventListener('fullscreenchange', settleViewport);
+document.addEventListener('webkitfullscreenchange', settleViewport);
+// The visual viewport reports the URL bar sliding away before the layout does.
+window.visualViewport?.addEventListener('resize', () => resize());
 function animate(now: number) {
   if (document.hidden) { frame = 0; return; }
   const delta = lastTime ? Math.min((now - lastTime) / 1000, .1) : 0;

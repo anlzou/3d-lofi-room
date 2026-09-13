@@ -68,6 +68,23 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
   const fanHead=root.getObjectByName('ANIM_fan_head');
   const fanSwing=[0,.5,.62],fanRate=[.55,.55,.8];
   let fanSway=0,fanPhase=0;
+  // The globe keeps a faint light of its own, day and night. Its continents are their own facets
+  // inside Globe_Sphere (the MAT_P2_Sage primitive of a multi-material mesh), so an emissive on that
+  // material reads as a map of softly lit land — no texture needed, and the oceans stay dark.
+  // The sphere is kept out of static batching in main.ts, because a batch renders its own copy of
+  // the geometry and hides these source meshes — a glow set here would never be drawn.
+  // Deliberately emissive only: a real light here spills onto the wall behind the shelf, which reads
+  // as the wall glowing rather than the globe.
+  const globeLand:{mat:THREE.MeshStandardMaterial;strength:number}[]=[];
+  root.getObjectByName('Globe_Sphere')?.traverse(o=>{
+    if(!(o instanceof THREE.Mesh)||Array.isArray(o.material))return;
+    const original=o.material as THREE.MeshStandardMaterial;
+    if(original.name!=='MAT_P2_Sage')return;
+    const m=original.clone();
+    m.onBeforeCompile=original.onBeforeCompile;m.customProgramCacheKey=original.customProgramCacheKey;
+    m.emissive.set('#ffcf8f');m.emissiveIntensity=0;m.toneMapped=false;
+    o.material=m;globeLand.push({mat:m,strength:.18});
+  });
   // One soft radial sprite drives every additive halo in the room.
   const haloTexture = (() => {
     const canvas=document.createElement('canvas');canvas.width=canvas.height=64;
@@ -201,6 +218,8 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
         if(i===lit.button)m.emissive.set(lit.color);
         m.emissiveIntensity=THREE.MathUtils.damp(m.emissiveIntensity,i===lit.button?lit.intensity:0,6,dt);
       }
+      // The globe fades up once and then stays: a steady, faint land glow, not another switch.
+      for(const g of globeLand)g.mat.emissiveIntensity=THREE.MathUtils.damp(g.mat.emissiveIntensity,g.strength,1.2,dt);
       // Neon strip: every bulb carries its own material and halo, so the whole run reacts
       // to the colour picker, the auto hue cycle, the blink rate and the chase. The rainbow
       // ramp gives each bulb its own hue, so the chase travels through a colour gradient.
