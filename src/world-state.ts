@@ -25,7 +25,12 @@ export interface WorldState {
   audio: { enabled: boolean; masterVolume: number };
   camera: 'room' | 'desk' | 'window' | 'tv';
   // How fast the window-sill warriors play their looping actions (the console's speed slider).
+  // 1 is the authored pace: the clips play at the rate they were exported at and the scripts'
+  // storyboards run at their written timings. Everything else scales from here.
   warriorSpeed: number;
+  // How see-through the console panel is: 1 is the solid old panel, .2 is bare glass. Kept in
+  // the save so the room comes back looking the way it was left.
+  glass: number;
   devices: { lamp: boolean; bedsideLamp:boolean; ceilingLamp:boolean; lavaLamp:boolean; stringLights:boolean; streetLamp:boolean; tv: boolean; mac: boolean; windowOpen: boolean; blinds: boolean; fanSpeed: 0 | 1 | 2; heater: boolean };
   levels: LightLevels;
   // Look of the window string lights, drawn as a neon strip: hex colour, blink rate in Hz
@@ -108,6 +113,8 @@ export function restoreState(raw: unknown, query = ''): WorldState {
     if (typeof r.showcase === 'boolean') d.showcase = r.showcase;
     if (['room','desk','window','tv'].includes(r.camera!)) d.camera = r.camera!;
     if (Number.isFinite(r.warriorSpeed)) d.warriorSpeed = Math.max(0, Math.min(2, r.warriorSpeed!));
+    // Anything below a fifth of the way to opaque stops being readable over the room.
+    if (Number.isFinite(r.glass)) d.glass = Math.max(.2, Math.min(1, r.glass!));
     if (r.devices && typeof r.devices === 'object') for (const key of ['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp','tv','mac','windowOpen','blinds','heater'] as const) {
       if (typeof r.devices[key] === 'boolean') d.devices[key] = r.devices[key];
     }
@@ -140,7 +147,7 @@ export function createDefaultState(): WorldState {
     // 展示模式 is on out of the box: a first visit opens on a room that is already living its
     // own day, starting late morning so there is light to see it by.
     schemaVersion: 2, season: 'autumn', time: 11 + 30 / 60, weather: 'clear', autopilot: false, showcase: true,
-    audio: { enabled: false, masterVolume: 0.12 }, camera: 'room', warriorSpeed: 1,
+    audio: { enabled: false, masterVolume: 0.12 }, camera: 'room', warriorSpeed: 1, glass: .72,
     devices: { lamp: true, bedsideLamp:false, ceilingLamp:false, lavaLamp:false, stringLights:false, streetLamp:true, tv: true, mac: true, windowOpen: false, blinds: true, fanSpeed: 0, heater: false },
     levels: { lamp: 1, bedsideLamp: 1, ceilingLamp: 1, lavaLamp: 1, stringLights: 1, streetLamp: 1, mac: 1, tv: 1 },
     strip: { color: '#ffb266', blink: 0, cycle: false, chase: false, rainbow: false },

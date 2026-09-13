@@ -61,7 +61,7 @@ const fullscreen = document.querySelector<HTMLButtonElement>('#fullscreen')!;
 let hour = 11 + 30 / 60;
 // Last minute written to the clock, so an unchanged clock or phase is not rewritten per frame.
 let shownMinutes = -1;
-const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); });
+const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); }, index => { warriorSceneWanted = index; });
 // Every light is multiplied by this eased 0..1 value, so switches flip instantly while the
 // room fades. 展示模式 uses the slow curve; manual taps keep the quick one.
 const fade = lightFade(settings.state.devices);
@@ -85,6 +85,11 @@ let life: ReturnType<typeof roomLife> | undefined;
 let touch:ReturnType<typeof touchFeedback>|undefined;
 // The window-sill warriors are a runtime import (see warrior.ts), so they can be absent.
 let warriors:Warriors|undefined;
+// 窗台对打 state: the beat last announced, the script the console asked for, and the desk lamp's
+// setting to hand back once the scene is over.
+let warriorBeat='';
+let warriorSceneWanted=0;
+let warriorLampBefore:boolean|undefined;
 const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
 // Meshes kept out of static batching because their material is driven at runtime:
 // the pendant and bedside shades glow on demand, and every string-light bulb animates.
@@ -722,8 +727,6 @@ function resize(force = false) {
   renderer.setSize(innerWidth, innerHeight);
 }
 window.addEventListener('resize', () => resize());
-// TEMP WARRIOR PROBE (remove)
-Object.assign(window, { __lofi: { scene, camera, renderer, settings } });
 // Entering fullscreen hides a phone's URL bar and turning the phone swaps the viewport, and Chrome
 // may still report the previous size inside the event itself, so settle it again on the next
 // frames. Rotating the phone is the case that matters most: without it the canvas keeps the old
@@ -753,7 +756,35 @@ function animate(now: number) {
   fade.update(delta, settings.state.devices, settings.state.showcase);
   weatherDim=THREE.MathUtils.damp(weatherDim,settings.state.weather==='clear'?1:settings.state.weather==='cloudy'?.72:.3,.6,delta);
   updateLight();life?.update(delta);touch?.update(delta);
-  if (warriors) { warriors.setSpeed(settings.state.warriorSpeed); warriors.update(delta); }
+  if (warriors) {
+    warriors.setSpeed(settings.state.warriorSpeed);
+    warriors.update(delta);
+    // The console's 互动动画 menu is the only way in and out of a script: 不播放 stops it.
+    if (warriorSceneWanted !== warriors.sceneIndex()) {
+      const was = warriors.sceneIndex();
+      const now = warriors.selectScene(warriorSceneWanted);
+      warriorBeat = '';
+      if (now && !was) {
+        // The scene is lit by the desk lamp, and the room's own switch goes back afterwards.
+        warriorLampBefore = settings.state.devices.lamp;
+        settings.state.devices.lamp = true;
+        settings.sync();
+        settings.save();
+      } else if (!now && was && warriorLampBefore !== undefined) {
+        settings.state.devices.lamp = warriorLampBefore;
+        warriorLampBefore = undefined;
+        settings.sync();
+        settings.save();
+        status.textContent = '互动动画已停止 · 台灯交回控制台';
+      }
+    }
+    if (warriors.scenePlaying()) {
+      // 展示模式 could switch the lamp back off between beats, so hold it while a script runs.
+      if (!settings.state.devices.lamp) { settings.state.devices.lamp = true; settings.sync(); }
+      const beat = warriors.sceneBeat();
+      if (beat && beat !== warriorBeat) { warriorBeat = beat; status.textContent = beat; }
+    }
+  }
   if (fanBlades) fanBlades.rotation.z += delta * [0, 7, 38][settings.state.devices.fanSpeed];
   for (const { sprite, base, offset } of sleepMarks) {
     const breath = (Math.sin(now / 1300 - offset * .8) + 1) / 2;

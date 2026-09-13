@@ -1,4 +1,7 @@
-:root{font-family:'Segoe UI','Microsoft YaHei',sans-serif;color:#ede4d4;font-synthesis:none;color-scheme:dark}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#252a30;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}#app{position:fixed;inset:0;touch-action:none}canvas{display:block;outline:none;touch-action:none}.ui{position:fixed;z-index:2;transition:opacity .25s}.masthead{top:42px;left:44px;pointer-events:none}.eyebrow{font-size:9px;letter-spacing:2.6px;opacity:.55}h1{font-weight:400;font-size:31px;letter-spacing:5px;margin:18px 0 12px}h1 span{display:block;font-family:Georgia,serif;font-style:italic;font-size:20px;letter-spacing:1px;margin-top:8px;opacity:.75}.masthead p{font-size:11px;letter-spacing:3px;opacity:.52}.chapter{right:42px;top:46px;font-size:10px;letter-spacing:1.6px}.chapter small{display:block;text-align:right;margin-top:12px;font-size:10px;letter-spacing:1px;opacity:.5}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#c9b78e;margin-right:8px}.time-mark{right:42px;top:37%;display:flex;align-items:flex-end;flex-direction:column;gap:12px;pointer-events:none}.time-mark span{font-size:9px;letter-spacing:2px;opacity:.62}#clock{font-family:Georgia,serif;font-size:57px;font-weight:400;letter-spacing:-2px}.console{position:relative;width:462px;max-width:calc(100vw - 32px);background:#252728e8;border:1px solid #d1bd9529;border-radius:12px;padding:17px 20px;box-shadow:0 12px 40px #0002;backdrop-filter:blur(18px);user-select:none;display:flex;flex-direction:column}
+:root{font-family:'Segoe UI','Microsoft YaHei',sans-serif;color:#ede4d4;font-synthesis:none;color-scheme:dark}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#252a30;-webkit-tap-highlight-color:transparent;overscroll-behavior:none}#app{position:fixed;inset:0;touch-action:none}canvas{display:block;outline:none;touch-action:none}.ui{position:fixed;z-index:2;transition:opacity .25s}.masthead{top:42px;left:44px;pointer-events:none}.eyebrow{font-size:9px;letter-spacing:2.6px;opacity:.55}h1{font-weight:400;font-size:31px;letter-spacing:5px;margin:18px 0 12px}h1 span{display:block;font-family:Georgia,serif;font-style:italic;font-size:20px;letter-spacing:1px;margin-top:8px;opacity:.75}.masthead p{font-size:11px;letter-spacing:3px;opacity:.52}.chapter{right:42px;top:46px;font-size:10px;letter-spacing:1.6px}.chapter small{display:block;text-align:right;margin-top:12px;font-size:10px;letter-spacing:1px;opacity:.5}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#c9b78e;margin-right:8px}.time-mark{right:42px;top:37%;display:flex;align-items:flex-end;flex-direction:column;gap:12px;pointer-events:none}.time-mark span{font-size:9px;letter-spacing:2px;opacity:.62}#clock{font-family:Georgia,serif;font-size:57px;font-weight:400;letter-spacing:-2px}/* The console is a pane of smoked glass: one number (--console-alpha, set by the 面板 slider)
+   drives its fill, its edge, its blur and the shadow under its text, so a transparent panel
+   still reads over a bright room. */
+.console{position:relative;width:372px;max-width:calc(100vw - 32px);background:rgb(37 39 40 / var(--console-alpha,.72));border:1px solid rgb(209 189 149 / calc(var(--console-alpha,.72) * .34));border-radius:12px;padding:15px 17px;box-shadow:0 18px 52px #0003;backdrop-filter:blur(calc(10px + var(--console-alpha,.72) * 24px)) saturate(150%);text-shadow:0 1px 2px rgb(0 0 0 / calc((1 - var(--console-alpha,.72)) * .55));user-select:none;display:flex;flex-direction:column}
 /* The settings scroll while the title — and with it the drag handle and the ⟲ reset — hold still. */
 .console-body{flex:1 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .dock{bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:flex-start;gap:6px;user-select:none;-webkit-user-select:none}
@@ -46,9 +49,8 @@ select:disabled{opacity:.45;cursor:not-allowed}footer{bottom:calc(24px + env(saf
 .room-panel summary::-webkit-details-marker{display:none}
 .room-panel summary::before{content:'▸';font-size:8px;opacity:.6}
 .room-panel[open] summary::before{content:'▾'}
-.panel-groups{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.panel-card{background:#ffffff06;border:1px solid #ffffff10;border-radius:9px;padding:9px 11px}
-.panel-card h2{margin:0 0 7px;font-size:9px;font-weight:400;letter-spacing:1.7px;color:#cabc9f;opacity:.9}
+/* Cards are a lighter veil than the panel itself, so they stay visible however clear the glass. */
+.panel-card{background:#ffffff0d;border:1px solid #ffffff1c;border-radius:9px;padding:9px 11px}
 .lamp-entry+.lamp-entry{margin-top:3px}
 .lamp-row{display:grid;grid-template-columns:56px 32px 1fr 34px;align-items:center;gap:8px;min-height:23px;transition:opacity .2s}
 .lamp-entry.is-off{opacity:.45}
@@ -74,7 +76,21 @@ select:disabled{opacity:.45;cursor:not-allowed}footer{bottom:calc(24px + env(saf
 .panel-pair select{flex:1;min-width:0}
 .panel-buttons{display:flex;flex-wrap:wrap;gap:6px}
 .panel-buttons button{flex:1 1 auto}
-.volume-row{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:9px;margin-top:8px;font-size:10px;color:#b8b0a0}
+/* The console is a stack of groups rather than one long sheet: every card folds on its own, so the
+   part you are not using can be put away. (The grid is what was missing before — the cards used to
+   sit flush against each other with nothing between them.) */
+.panel-groups{display:grid;gap:8px;margin-top:10px}
+.panel-card>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:6px;margin:0;font-size:9px;font-weight:400;letter-spacing:1.7px;color:#cabc9f;opacity:.9}
+.panel-card>summary::-webkit-details-marker{display:none}
+.panel-card>summary::before{content:'▸';font-size:8px;opacity:.6}
+.panel-card[open]>summary::before{content:'▾'}
+.panel-card[open]>summary{margin-bottom:7px}
+.field-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:9px;font-size:10px;color:#b8b0a0}
+.field-row+.field-row{margin-top:8px}
+.field-row>input[type=range]{width:100%}
+.field-row>output{min-width:34px;text-align:right;font-variant-numeric:tabular-nums;opacity:.55}
+
+@media(pointer:coarse){.panel-card>summary{padding:5px 0;font-size:12px}.field-row,.field-row>input[type=range]{min-height:34px}}
 button[aria-pressed=true]{border-color:#c9ad75;background:#c9ad751c}
 .console.dragging{box-shadow:0 20px 56px #0006;border-color:#d1bd9552}
 .console.dragging .console-title{cursor:grabbing}
@@ -94,7 +110,7 @@ input[type=range]{height:28px;touch-action:pan-y}
 .room-panel summary{padding:5px 0;font-size:12px}
 .panel-buttons button,.lamp-flags button{min-height:38px;font-size:10px}
 .panel-pair select{min-height:36px}
-.panel-pair label,.lamp-name,.volume-row{font-size:11px}
+.panel-pair label,.lamp-name{font-size:11px}
 }
 .console{max-height:calc(78vh - 70px);max-height:calc(78svh - 70px)}
 .dock.dragging{will-change:left,top}
@@ -120,7 +136,7 @@ input[type=range]{height:28px;touch-action:pan-y}
 .console{max-height:calc(100svh - 96px)}
 }
 @media(max-height:520px) and (min-width:560px){
-.console{width:min(440px,60vw);max-width:min(440px,60vw)}
+.console{width:min(372px,62vw);max-width:min(372px,62vw)}
 }
 @media(max-height:520px) and (max-width:700px){
 .lamp-row{grid-template-columns:50px 32px 1fr 30px}

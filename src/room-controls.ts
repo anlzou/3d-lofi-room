@@ -1,7 +1,8 @@
 import { restoreState, legalWeather, seasons, weathers, seasonLabels, seasonMottos, weatherLabels, lightKeys, lightLabels, type Season, type Weather, type LightKey } from './world-state';
+import { scripts } from './warrior';
 import {audioActivity} from './audio-activity';
 import {dropdown} from './dropdown';
-export function roomControls(onChange: () => void) {
+export function roomControls(onChange: () => void, onScene?: (index: number) => void) {
   let raw: unknown;
   try { raw = JSON.parse(localStorage.getItem('lofi-room-v1') ?? 'null'); } catch { /* Private storage may be unavailable. */ }
   const state = restoreState(raw, location.search);
@@ -9,17 +10,26 @@ export function roomControls(onChange: () => void) {
   const stripExtra = `<div class="lamp-extra"><input type="color" data-color="stringLights" aria-label="串灯颜色" title="串灯颜色" /><input type="range" class="blink" min="0" max="5" step="0.1" data-blink="stringLights" aria-label="串灯节奏" /><output class="blink-value" data-blink-value="stringLights">常亮</output></div><div class="lamp-flags"><button data-flag="cycle" aria-pressed="false">自动变色</button><button data-flag="chase" aria-pressed="false">顺序点亮</button><button data-flag="rainbow" aria-pressed="false" title="每个灯泡颜色不同，沿灯串渐变过渡">彩虹</button></div>`;
   const lampRow = (key: LightKey) => `<div class="lamp-entry" data-row="${key}"><div class="lamp-row"><span class="lamp-name">${lightLabels[key]}</span><button class="switch" data-device="${key}" aria-pressed="false" aria-label="${lightLabels[key]}开关"><span></span></button><input class="level" type="range" min="0" max="100" step="5" data-level="${key}" aria-label="${lightLabels[key]}强度" /><output class="level-value" data-value="${key}">100%</output></div>${key==='stringLights'?stripExtra:''}</div>`;
   const rows = (keys: LightKey[]) => keys.map(lampRow).join('');
-  panel.innerHTML = `<summary>灯光 · 屏幕 · 环境 · 声音</summary><div class="panel-groups">
-    <section class="panel-card"><h2>灯光</h2>${rows(['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp'])}</section>
-    <section class="panel-card"><h2>屏幕</h2>${rows(['mac','tv'])}</section>
-    <section class="panel-card"><h2>环境</h2><div class="panel-pair">
+  panel.innerHTML = `<summary>灯光 · 屏幕 · 环境 · 窗台战士 · 声音 · 面板</summary><div class="panel-groups">
+    <details class="panel-card" open><summary>灯光</summary>${rows(['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp'])}</details>
+    <details class="panel-card" open><summary>屏幕</summary>${rows(['mac','tv'])}</details>
+    <details class="panel-card" open><summary>环境</summary><div class="panel-pair">
     <label>季节<span class="dropdown" id="season-drop"></span></label>
     <label>窗外<span class="dropdown" id="weather-drop"></span></label>
-    </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div><label class="volume-row">战士动作速度<input id="warrior-speed" aria-label="战士动作速度" type="range" min="0" max="2" step=".1" /><output id="warrior-speed-value">1.0×</output></label></section>
-    <section class="panel-card"><h2>声音</h2><div class="panel-buttons"><button id="sound">开启环境声</button><button id="music" aria-pressed="false">播放窗边留座 ♫</button><button id="chime" aria-pressed="false">风铃声 · 关</button></div>
-    <label class="volume-row">音量<input id="volume" aria-label="音量" type="range" min="0" max="1" step=".01" /></label></section></div>`;
+    </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></details>
+    <details class="panel-card" open><summary>窗台战士</summary>
+    <label class="field-row">互动动画<span class="dropdown" id="scene-drop"></span></label>
+    <label class="field-row">动作速度<input id="warrior-speed" aria-label="战士动作速度" type="range" min="0" max="2" step=".1" /><output id="warrior-speed-value">1.0×</output></label></details>
+    <details class="panel-card" open><summary>声音</summary><div class="panel-buttons"><button id="sound">开启环境声</button><button id="music" aria-pressed="false">播放窗边留座 ♫</button><button id="chime" aria-pressed="false">风铃声 · 关</button></div>
+    <label class="field-row">音量<input id="volume" aria-label="音量" type="range" min="0" max="1" step=".01" /></label></details>
+    <details class="panel-card" open><summary>面板</summary>
+    <label class="field-row">透明度<input id="glass" aria-label="控制面板透明度" type="range" min=".2" max="1" step=".02" /><output id="glass-value">72%</output></label></details></div>`;
   document.querySelector('.console-body')!.append(panel);
   const select = <T extends HTMLElement>(s: string) => panel.querySelector<T>(s)!;
+  // The glass is one number on the console: the stylesheet derives its fill, its edge and its
+  // blur from it, so the whole look follows a single slider.
+  const consoleEl = panel.closest<HTMLElement>('.console');
+  const applyGlass = (alpha: number) => consoleEl?.style.setProperty('--console-alpha', String(alpha));
   // Season and weather pick their lists in-page too, so the whole console keeps one popup style.
   const seasonDrop = dropdown(select('#season-drop'), seasons.map(s => ({ value: s, label: `${seasonLabels[s]} · ${seasonMottos[s]}` })), state.season, value => {
     state.season = value; state.autopilot = false; state.weather = legalWeather(state.season, state.weather); changed();
@@ -27,6 +37,9 @@ export function roomControls(onChange: () => void) {
   const weatherDrop = dropdown(select('#weather-drop'), weathers.map(w => ({ value: w, label: weatherLabels[w] })), state.weather, value => {
     state.weather = legalWeather(state.season, value); changed();
   }, '天气');
+  // 互动动画：两套剧本由同一个下拉选——“不播放”就是停止，菜单直接由剧本表构建。
+  const sceneChoices = [{ value: '0', label: '不播放' }, ...scripts.map((script, index) => ({ value: String(index + 1), label: script.label }))];
+  const sceneDrop = dropdown(select('#scene-drop'), sceneChoices, '0', value => onScene?.(Number(value)), '互动动画');
   const save = () => { try { localStorage.setItem('lofi-room-v1',JSON.stringify(state)); } catch { /* Nonessential persistence. */ } };
   const sync = () => {
     seasonDrop.set(state.season);
@@ -54,12 +67,17 @@ export function roomControls(onChange: () => void) {
     const warriorSpeed = select<HTMLInputElement>('#warrior-speed');
     if (warriorSpeed.value !== String(state.warriorSpeed)) warriorSpeed.value = String(state.warriorSpeed);
     select<HTMLOutputElement>('#warrior-speed-value').textContent = `${state.warriorSpeed.toFixed(1)}×`;
+    const glass = select<HTMLInputElement>('#glass');
+    if (glass.value !== String(state.glass)) glass.value = String(state.glass);
+    select<HTMLOutputElement>('#glass-value').textContent = `${Math.round(state.glass * 100)}%`;
+    applyGlass(state.glass);
     document.querySelector('#season-label')!.textContent = `${state.season.toUpperCase()}, 2026`;
   };
   const changed = () => { sync(); save(); onChange(); };
   panel.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(b => b.onclick=()=>{const k=b.dataset.device as 'lamp';state.devices[k]=!state.devices[k];changed();});
   panel.querySelectorAll<HTMLInputElement>('[data-level]').forEach(input => input.oninput=()=>{state.levels[input.dataset.level as LightKey]=Number(input.value)/100;changed();});
   select<HTMLInputElement>('#warrior-speed').oninput=e=>{state.warriorSpeed=Number((e.target as HTMLInputElement).value);changed();};
+  select<HTMLInputElement>('#glass').oninput=e=>{state.glass=Number((e.target as HTMLInputElement).value);changed();};
   select<HTMLInputElement>('[data-color="stringLights"]').oninput=e=>{state.strip.color=(e.target as HTMLInputElement).value.toLowerCase();changed();};
   select<HTMLInputElement>('[data-blink="stringLights"]').oninput=e=>{state.strip.blink=Number((e.target as HTMLInputElement).value);changed();};
   panel.querySelectorAll<HTMLButtonElement>('[data-flag]').forEach(b => b.onclick=()=>{
