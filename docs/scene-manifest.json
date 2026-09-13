@@ -1,0 +1,6673 @@
+{
+  "groups": [
+    {
+      "key": "TV",
+      "label": "CRT + tilted cabinet",
+      "zone": "tv",
+      "objects": [
+        "TvStand_Main",
+        "TvStand_Shelf",
+        "Crt_Body",
+        "Crt_Bezel",
+        "Crt_ScreenBacking",
+        "Crt_AntennaLeft",
+        "Crt_AntennaRight",
+        "Vhs_Body",
+        "Vhs_Tape_00",
+        "Vhs_Tape_01",
+        "Vhs_Tape_02",
+        "EMIT_screen_crt"
+      ],
+      "priority": "P0",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.2943306267261505,
+        0.7396543622016907
+      ]
+    },
+    {
+      "key": "VCR",
+      "label": "VHS recorder / door",
+      "zone": "tv",
+      "objects": [
+        "Vhs_Body",
+        "ANIM_vcr_door"
+      ],
+      "priority": "P0",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.29721400141716003,
+        0.7481274306774139
+      ]
+    },
+    {
+      "key": "DVD",
+      "label": "DVD player / tray",
+      "zone": "tv",
+      "objects": [
+        "ANIM_dvd_tray",
+        "Dvd_Body"
+      ],
+      "priority": "P0",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.296737939119339,
+        0.7497873902320862
+      ]
+    },
+    {
+      "key": "TAPES",
+      "label": "VHS labels / DVD cases",
+      "zone": "tv",
+      "objects": [
+        "Vhs_ExtraTape_00",
+        "Vhs_HandLabel_00",
+        "Vhs_ExtraTape_01",
+        "Vhs_HandLabel_01",
+        "Vhs_ExtraTape_02",
+        "Vhs_HandLabel_02",
+        "Vhs_ExtraTape_03",
+        "Vhs_HandLabel_03",
+        "Vhs_ExtraTape_04",
+        "Vhs_HandLabel_04",
+        "Dvd_Case_00",
+        "Dvd_Case_01",
+        "Dvd_Case_02",
+        "Dvd_Case_03"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.2924077808856964,
+        0.722739964723587
+      ]
+    },
+    {
+      "key": "GAME",
+      "label": "Console / controller / cable / remote",
+      "zone": "tv",
+      "objects": [
+        "GameConsole_Body",
+        "Game_Controller",
+        "Tv_Remote",
+        "Cable_GameController"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.3661252558231354,
+        0.745475709438324
+      ]
+    },
+    {
+      "key": "DESK",
+      "label": "Desk 0.72m / Mac 0.34m",
+      "zone": "desk",
+      "objects": [
+        "Desk_Main",
+        "EMIT_screen_mac",
+        "INT_mac"
+      ],
+      "priority": "P0",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.36702898144721985,
+        0.5375722944736481
+      ]
+    },
+    {
+      "key": "KEYS",
+      "label": "Keyboard / mouse",
+      "zone": "desk",
+      "objects": [
+        "Keyboard_Base",
+        "Keyboard_Key_00_00",
+        "Keyboard_Key_00_01",
+        "Keyboard_Key_00_02",
+        "Keyboard_Key_00_03",
+        "Keyboard_Key_00_04",
+        "Keyboard_Key_00_05",
+        "Keyboard_Key_00_06",
+        "Keyboard_Key_00_07",
+        "Keyboard_Key_00_08",
+        "Keyboard_Key_00_09",
+        "Keyboard_Key_01_00",
+        "Keyboard_Key_01_01",
+        "Keyboard_Key_01_02",
+        "Keyboard_Key_01_03",
+        "Keyboard_Key_01_04",
+        "Keyboard_Key_01_05",
+        "Keyboard_Key_01_06",
+        "Keyboard_Key_01_07",
+        "Keyboard_Key_01_08",
+        "Keyboard_Key_01_09",
+        "Keyboard_Key_02_00",
+        "Keyboard_Key_02_01",
+        "Keyboard_Key_02_02",
+        "Keyboard_Key_02_03",
+        "Keyboard_Key_02_04",
+        "Keyboard_Key_02_05",
+        "Keyboard_Key_02_06",
+        "Keyboard_Key_02_07",
+        "Keyboard_Key_02_08",
+        "Keyboard_Key_02_09",
+        "Mouse_Main"
+      ],
+      "priority": "P0",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.36518341302871704,
+        0.5705842673778534
+      ]
+    },
+    {
+      "key": "TASKLAMP",
+      "label": "Task lamp",
+      "zone": "desk",
+      "objects": [
+        "INT_lamp_desk"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.2967391312122345,
+        0.522826075553894
+      ]
+    },
+    {
+      "key": "TOWER",
+      "label": "Computer tower",
+      "zone": "desk",
+      "objects": [
+        "Computer_Tower",
+        "Computer_Drive"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.4532608687877655,
+        0.5350543558597565
+      ]
+    },
+    {
+      "key": "MODEM",
+      "label": "Modem / coiled phone cable",
+      "zone": "desk",
+      "objects": [
+        "Modem_Body",
+        "INT_phone",
+        "Cable_Phone_Coil"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.40797102451324463,
+        0.5775362253189087
+      ]
+    },
+    {
+      "key": "SPEAKERS",
+      "label": "Pair of speakers",
+      "zone": "desk",
+      "objects": [
+        "Speaker_0",
+        "Speaker_Cone_0",
+        "Speaker_1",
+        "Speaker_Cone_1"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.36250001192092896,
+        0.5128260850906372
+      ]
+    },
+    {
+      "key": "CLOCK",
+      "label": "Flip clock / calendar",
+      "zone": "desk",
+      "objects": [
+        "INT_clock_flip",
+        "EMIT_screen_flip",
+        "INT_calendar"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.4384057819843292,
+        0.5257970988750458
+      ]
+    },
+    {
+      "key": "SNACK",
+      "label": "Noodles / mug / stationery",
+      "zone": "desk",
+      "objects": [
+        "Noodles_Bowl",
+        "Pencil_Cup",
+        "Mug_Main",
+        "Sticky_Desk_00",
+        "Sticky_Desk_01",
+        "Sticky_Desk_02",
+        "Sticky_Desk_03",
+        "Sticky_Mac_00",
+        "Sticky_Mac_01"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.3909420371055603,
+        0.5419080853462219
+      ]
+    },
+    {
+      "key": "AUDIO",
+      "label": "Walkman / headphones / cable",
+      "zone": "desk",
+      "objects": [
+        "Walkman_Body",
+        "Headphones_Band",
+        "Cable_Headphone"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.4681159555912018,
+        0.6278985440731049
+      ]
+    },
+    {
+      "key": "DISKS",
+      "label": "Floppy box / loose CDs",
+      "zone": "desk",
+      "objects": [
+        "Floppy_Box",
+        "Cd_Loose_00",
+        "Cd_Loose_01"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.438043475151062,
+        0.5311594307422638
+      ]
+    },
+    {
+      "key": "POWER",
+      "label": "Power strip / six device cables / plugs",
+      "zone": "desk",
+      "objects": [
+        "PowerStrip_Main",
+        "Cable_Device_00",
+        "Cable_Device_01",
+        "Cable_Device_02",
+        "Cable_Device_03",
+        "Cable_Device_04",
+        "Cable_Device_05"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.4628882110118866,
+        0.6296584010124207
+      ]
+    },
+    {
+      "key": "WALLSHELF",
+      "label": "Long wall shelf / CD tower / globe / figures / Lego / manuals",
+      "zone": "right-wall",
+      "objects": [
+        "WallShelf_Long",
+        "WallShelf_Cd_00",
+        "WallShelf_Cd_01",
+        "WallShelf_Cd_02",
+        "WallShelf_Cd_03",
+        "WallShelf_Cd_04",
+        "WallShelf_Cd_05",
+        "WallShelf_Cd_06",
+        "WallShelf_Cd_07",
+        "WallShelf_Cd_08",
+        "WallShelf_Cd_09",
+        "Globe_Sphere",
+        "Figurine_Head_00",
+        "Figurine_Body_00",
+        "Figurine_Head_01",
+        "Figurine_Body_01",
+        "Lego_Block_00",
+        "Lego_Block_01",
+        "Lego_Block_02",
+        "Lego_Block_03",
+        "Manual_Shelf_00",
+        "Manual_Shelf_01",
+        "Manual_Shelf_02"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.6749999523162842,
+        0.6538043320178986
+      ]
+    },
+    {
+      "key": "POSTERS",
+      "label": "Three skewed posters",
+      "zone": "right-wall",
+      "objects": [
+        "Poster_00",
+        "Poster_Moon_00",
+        "Poster_Caption_00",
+        "Poster_01",
+        "Poster_Moon_01",
+        "Poster_Caption_01",
+        "Poster_02",
+        "Poster_Moon_02",
+        "Poster_Caption_02"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.6909420490264893,
+        0.6902174055576324
+      ]
+    },
+    {
+      "key": "NOTICE",
+      "label": "Corkboard / photos / notes / tickets",
+      "zone": "right-wall",
+      "objects": [
+        "Corkboard_Main",
+        "Corkboard_Photo_00",
+        "Corkboard_Pin_00",
+        "Corkboard_Photo_01",
+        "Corkboard_Pin_01",
+        "Corkboard_Photo_02",
+        "Corkboard_Pin_02",
+        "Corkboard_Photo_03",
+        "Corkboard_Pin_03",
+        "Corkboard_Photo_04",
+        "Corkboard_Pin_04",
+        "Corkboard_Photo_05",
+        "Corkboard_Pin_05"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.686989963054657,
+        0.5552675426006317
+      ]
+    },
+    {
+      "key": "WALLCLOCK",
+      "label": "Wall clock / hands",
+      "zone": "right-wall",
+      "objects": [
+        "INT_clock_wall",
+        "ANIM_clock_hour",
+        "ANIM_clock_minute"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.6880072355270386,
+        0.8108695894479752
+      ]
+    },
+    {
+      "key": "LOWWALL",
+      "label": "Low bookshelf / skateboard",
+      "zone": "right-wall",
+      "objects": [
+        "LowBookshelf_Main",
+        "Skateboard_Deck"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.653804361820221,
+        0.8092391192913055
+      ]
+    },
+    {
+      "key": "BED",
+      "label": "Raised bed / folded duvet / cushion / open comic",
+      "zone": "bed",
+      "objects": [
+        "Bed_Blanket",
+        "Bed_Cushion",
+        "Comic_OpenLeft",
+        "Comic_OpenRight"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.6206521987915039,
+        0.5983695685863495
+      ]
+    },
+    {
+      "key": "NIGHTSTAND",
+      "label": "Nightstand / alarm / water / nightlight",
+      "zone": "bed",
+      "objects": [
+        "Nightstand_Main",
+        "Alarm_Body",
+        "EMIT_screen_alarm",
+        "Nightlight_Shade"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.5133152008056641,
+        0.5099999904632568
+      ]
+    },
+    {
+      "key": "SLIPPERS",
+      "label": "Pair of slippers",
+      "zone": "bed",
+      "objects": [
+        "Slipper_00",
+        "Slipper_01"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.5777174234390259,
+        0.729347825050354
+      ]
+    },
+    {
+      "key": "CAT",
+      "label": "Cat bed / sleeping cat",
+      "zone": "floor",
+      "objects": [
+        "Cat_Bed",
+        "INT_cat"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.47717392444610596,
+        0.7793478220701218
+      ]
+    },
+    {
+      "key": "TRASH",
+      "label": "Bin / missed paper balls",
+      "zone": "floor",
+      "objects": [
+        "Wastebasket_Main",
+        "Paper_Crumpled_00",
+        "Paper_Crumpled_01",
+        "Paper_Crumpled_02"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.27853262424468994,
+        0.623641312122345
+      ]
+    },
+    {
+      "key": "MAGAZINES",
+      "label": "Scattered magazines",
+      "zone": "floor",
+      "objects": [
+        "Magazine_Floor_00",
+        "Magazine_Floor_01",
+        "Magazine_Floor_02",
+        "Magazine_Floor_03"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.5693306922912598,
+        0.7668478190898895
+      ]
+    },
+    {
+      "key": "FOREGROUND",
+      "label": "Foreground plant / record crate",
+      "zone": "floor",
+      "objects": [
+        "Plant_Foreground_Pot",
+        "Plant_Foreground_Stem_00",
+        "Plant_Foreground_Leaf_00",
+        "Plant_Foreground_Stem_01",
+        "Plant_Foreground_Leaf_01",
+        "Plant_Foreground_Stem_02",
+        "Plant_Foreground_Leaf_02",
+        "Plant_Foreground_Stem_03",
+        "Plant_Foreground_Leaf_03",
+        "Plant_Foreground_Stem_04",
+        "Plant_Foreground_Leaf_04",
+        "Plant_Foreground_Stem_05",
+        "Plant_Foreground_Leaf_05",
+        "Box_Foreground"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.32119566202163696,
+        0.7057453393936157
+      ]
+    },
+    {
+      "key": "SILL",
+      "label": "Sill plant / tiny bird figure",
+      "zone": "window",
+      "objects": [
+        "Plant_Windowsill_Pot",
+        "Plant_Windowsill_Stem_00",
+        "Plant_Windowsill_Leaf_00",
+        "Plant_Windowsill_Stem_01",
+        "Plant_Windowsill_Leaf_01",
+        "Plant_Windowsill_Stem_02",
+        "Plant_Windowsill_Leaf_02",
+        "Plant_Windowsill_Stem_03",
+        "Plant_Windowsill_Leaf_03",
+        "Plant_Windowsill_Stem_04",
+        "Plant_Windowsill_Leaf_04",
+        "Plant_Windowsill_Stem_05",
+        "Plant_Windowsill_Leaf_05",
+        "Windowsill_Figurine"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.38540372252464294,
+        0.5564440786838531
+      ]
+    },
+    {
+      "key": "WINDOW",
+      "label": "Movable blinds / weather sockets / chime",
+      "zone": "window",
+      "objects": [
+        "INT_window",
+        "SOCKET_rain_window",
+        "SOCKET_petals_window",
+        "SOCKET_windchime"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.39673912525177,
+        0.468206524848938
+      ]
+    },
+    {
+      "key": "SEASONS",
+      "label": "Fan / heater / kettle / spring flowers / throw / scarf / iced drink",
+      "zone": "seasonal",
+      "objects": [
+        "SEASON_summer_fan",
+        "SEASON_winter_heater",
+        "SEASON_spring_flowerpot",
+        "SEASON_autumn_blanket",
+        "SEASON_winter_scarf",
+        "SEASON_summer_iceddrink",
+        "SOCKET_kettle_steam"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.4975155293941498,
+        0.5798136591911316
+      ]
+    },
+    {
+      "key": "CATSOCKETS",
+      "label": "Four cat destinations",
+      "zone": "seasonal",
+      "objects": [
+        "SOCKET_cat_bed",
+        "SOCKET_cat_heater",
+        "SOCKET_cat_windowsill",
+        "SOCKET_cat_fan"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.521467387676239,
+        0.6070652306079865
+      ]
+    },
+    {
+      "key": "LIGHTS",
+      "label": "Ceiling / pullcord / string path / lava lamp / five anchors",
+      "zone": "lights",
+      "objects": [
+        "Ceiling_Shade",
+        "StringLights_Wire",
+        "INT_lava_lamp",
+        "LIGHT_desk_lamp",
+        "LIGHT_ceiling",
+        "LIGHT_heater",
+        "LIGHT_string_lights",
+        "LIGHT_lava_lamp"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.500271737575531,
+        0.6304347813129425
+      ]
+    },
+    {
+      "key": "OUTSIDE",
+      "label": "Utility pole / wires / houses / fence",
+      "zone": "exterior",
+      "objects": [
+        "Exterior_House_00",
+        "Exterior_Roof_00",
+        "Exterior_Window_00_00",
+        "Exterior_Window_00_01",
+        "Exterior_House_01",
+        "Exterior_Roof_01",
+        "Exterior_Window_01_00",
+        "Exterior_Window_01_01",
+        "Exterior_House_02",
+        "Exterior_Roof_02",
+        "Exterior_Window_02_00",
+        "Exterior_Window_02_01",
+        "Exterior_UtilityPole",
+        "Exterior_Crossarm",
+        "Exterior_Powerline_00",
+        "Exterior_Powerline_01",
+        "Exterior_Fence_00",
+        "Exterior_Fence_01",
+        "Exterior_Fence_02",
+        "Exterior_Fence_03",
+        "Exterior_Fence_04",
+        "Exterior_Fence_05",
+        "Exterior_Fence_06",
+        "Exterior_Fence_07",
+        "Exterior_Fence_08",
+        "Exterior_Fence_09",
+        "Exterior_Fence_10",
+        "Exterior_Fence_11",
+        "Exterior_Fence_12",
+        "Exterior_Fence_13",
+        "Exterior_Fence_14",
+        "Exterior_Fence_15",
+        "Exterior_FenceRail",
+        "Exterior_FenceRail.001"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.5480179190635681,
+        0.20500820875167847
+      ]
+    },
+    {
+      "key": "EXTRAS",
+      "label": "Underbed boxes / frayed rug edge",
+      "zone": "extras",
+      "objects": [
+        "UnderBed_Storage_00",
+        "UnderBed_Storage_01",
+        "UnderBed_Storage_02",
+        "Rug_FrayedEdge"
+      ],
+      "priority": "P1",
+      "season": "all",
+      "layout": "1.5",
+      "refine": "2",
+      "runtime": "4",
+      "plan_uv": [
+        0.5788043737411499,
+        0.6937499940395355
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "name": "ANIM_blinds_slat_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_window",
+      "position": [
+        -0.8999999761581421,
+        1.590000033378601,
+        2.3499999046325684
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_blinds_slat_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_window",
+      "position": [
+        -0.8999999761581421,
+        1.590000033378601,
+        2.259999990463257
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_blinds_slat_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_window",
+      "position": [
+        -0.8999999761581421,
+        1.590000033378601,
+        2.1700000762939453
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_blinds_slat_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_window",
+      "position": [
+        -0.8999999761581421,
+        1.590000033378601,
+        2.0799999237060547
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_blinds_slat_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_window",
+      "position": [
+        -0.8999999761581421,
+        1.590000033378601,
+        1.9900000095367432
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_clock_hour",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9700000286102295,
+        -1.440000057220459,
+        2.0250000953674316
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_clock_minute",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.965000033378601,
+        -1.4700000286102295,
+        2.049999952316284
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_dvd_tray",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_dvd",
+      "position": [
+        -1.5576483011245728,
+        -0.9523517489433289,
+        0.40720000863075256
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_fan_blade_00",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "ANIM_fan_head",
+      "position": [
+        0.27000001072883606,
+        -0.41499999165534973,
+        0.5299999713897705
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_fan_blade_01",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "ANIM_fan_head",
+      "position": [
+        0.15000000596046448,
+        -0.41499999165534973,
+        0.5992820262908936
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_fan_blade_02",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "ANIM_fan_head",
+      "position": [
+        0.15000000596046448,
+        -0.41499999165534973,
+        0.46071797609329224
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_fan_head",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": "SEASON_summer_fan",
+      "position": [
+        0.1899999976158142,
+        -0.3700000047683716,
+        0.5
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "ANIM_vcr_door",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_vcr",
+      "position": [
+        -1.5634466409683228,
+        -0.9349568486213684,
+        0.31700000166893005
+      ],
+      "role": "anim"
+    },
+    {
+      "name": "Alarm_Body",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.38999998569488525,
+        1.2400000095367432,
+        0.699999988079071
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Blanket",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.309999942779541,
+        0.1899999976158142,
+        0.7350000143051147
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Cushion",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.6100000143051147,
+        0.9900000095367432,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Frame",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.309999942779541,
+        0.5400000214576721,
+        0.3199999928474426
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Headboard",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.309999942779541,
+        1.590000033378601,
+        0.6399999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Mattress",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.309999942779541,
+        0.5099999904632568,
+        0.550000011920929
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Bed_Pillow",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.309999942779541,
+        1.159999966621399,
+        0.7299999594688416
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Foreground",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.4500000476837158,
+        -1.7999999523162842,
+        0.2199999988079071
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Record_00",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.2799999713897705,
+        -1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Record_01",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.3550000190734863,
+        -1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Record_02",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.4299999475479126,
+        -1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Record_03",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.5049999952316284,
+        -1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Box_Record_04",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_04",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Device_05",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_GameController",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Headphone",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Mains",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cable_Phone_Coil",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Camera_Desk",
+      "type": "CAMERA",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -3.5,
+        -3.0,
+        2.9000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Camera_Plan",
+      "type": "CAMERA",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.25,
+        1.399999976158142,
+        15.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Camera_Room",
+      "type": "CAMERA",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -5.71999979019165,
+        -7.890000343322754,
+        5.5879998207092285
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Camera_Window",
+      "type": "CAMERA",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -3.5999999046325684,
+        -4.699999809265137,
+        3.0999999046325684
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Bed",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.03999999910593033,
+        -1.1699999570846558,
+        0.11999999731779099
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Ear",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": "INT_cat",
+      "position": [
+        0.18000000715255737,
+        -1.2000000476837158,
+        0.375
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Ear.001",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": "INT_cat",
+      "position": [
+        0.18000000715255737,
+        -1.1200000047683716,
+        0.375
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Head",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": "INT_cat",
+      "position": [
+        0.18000000715255737,
+        -1.159999966621399,
+        0.28999999165534973
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Placeholder",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": "INT_cat",
+      "position": [
+        0.03999999910593033,
+        -1.1699999570846558,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cat_Tail",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": "INT_cat",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cd_Loose_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6000000238418579,
+        0.9399999976158142,
+        0.7365000247955322
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Cd_Loose_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.28999999165534973,
+        1.0399999618530273,
+        0.7365000247955322
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Ceiling_PullWeight",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.4000000059604645,
+        0.5,
+        1.9600000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Ceiling_Shade",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.20000000298023224,
+        0.5,
+        2.565000057220459
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Ceiling_Suspension",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Back",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9200000166893005,
+        -0.07079999893903732,
+        0.7799999713897705
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Leg",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.113800048828125,
+        -0.013799999840557575,
+        0.22499999403953552
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Leg.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.113800048828125,
+        0.35099998116493225,
+        0.22499999403953552
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Leg.002",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.7261999845504761,
+        -0.013799999840557575,
+        0.22499999403953552
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Leg.003",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.7261999845504761,
+        0.35099998116493225,
+        0.22499999403953552
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Chair_Seat",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9200000166893005,
+        0.17999999225139618,
+        0.44999998807907104
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Comic_OpenLeft",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.149999976158142,
+        0.41999998688697815,
+        0.7799999713897705
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Comic_OpenRight",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.3700000047683716,
+        0.3799999952316284,
+        0.7799999713897705
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Comic_Panel_00",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.1200000047683716,
+        0.33000001311302185,
+        0.8050000071525574
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Comic_Panel_01",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.1200000047683716,
+        0.4000000059604645,
+        0.8050000071525574
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Comic_Panel_02",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.1200000047683716,
+        0.4699999988079071,
+        0.8050000071525574
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Computer_Drive",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.18000000715255737,
+        0.9750000238418579,
+        0.46000000834465027
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Computer_Tower",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.18000000715255737,
+        1.1799999475479126,
+        0.30000001192092896
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Main",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.009999990463257,
+        0.9100000262260437,
+        1.5700000524520874
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        0.6899999976158142,
+        1.4500000476837158
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        0.8899999856948853,
+        1.4500000476837158
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        1.090000033378601,
+        1.4500000476837158
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        0.6899999976158142,
+        1.6799999475479126
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_04",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        0.8899999856948853,
+        1.6799999475479126
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Photo_05",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9739999771118164,
+        1.090000033378601,
+        1.6799999475479126
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        0.6899999976158142,
+        1.5099999904632568
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        0.8899999856948853,
+        1.5099999904632568
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        1.090000033378601,
+        1.5099999904632568
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        0.6899999976158142,
+        1.7400000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_04",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        0.8899999856948853,
+        1.7400000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Corkboard_Pin_05",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9600000381469727,
+        1.090000033378601,
+        1.7400000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Crt_AntennaLeft",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.8859193325042725,
+        -0.8461159467697144,
+        1.0795999765396118
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Crt_AntennaRight",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.714634656906128,
+        -0.7261810898780823,
+        1.0631999969482422
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Crt_Bezel",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.686048984527588,
+        -0.9814497232437134,
+        0.7516000270843506
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Crt_Body",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.787846326828003,
+        -0.8074754476547241,
+        0.7351999878883362
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Crt_ScreenBacking",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.6752312183380127,
+        -0.996898889541626,
+        0.7516000270843506
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Desk_Leg",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.690000057220459,
+        0.7400000095367432,
+        0.33580002188682556
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Desk_Leg.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.690000057220459,
+        1.2899999618530273,
+        0.33580002188682556
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Desk_Leg.002",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.10999999940395355,
+        0.7400000095367432,
+        0.33580002188682556
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Desk_Leg.003",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.10999999940395355,
+        1.2899999618530273,
+        0.33580002188682556
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Desk_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.0299999713897705,
+        0.6800000071525574
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Dvd_Body",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.6823734045028687,
+        -0.8437363505363464,
+        0.40720000863075256
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Dvd_Case_00",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -2.0350394248962402,
+        -0.9405204653739929,
+        0.5548000335693359
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Dvd_Case_01",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -2.0350394248962402,
+        -0.9405204653739929,
+        0.5834999680519104
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Dvd_Case_02",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -2.0350394248962402,
+        -0.9405204653739929,
+        0.6122000217437744
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Dvd_Case_03",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -2.0350394248962402,
+        -0.9405204653739929,
+        0.6408999562263489
+      ],
+      "role": "static"
+    },
+    {
+      "name": "EMIT_led_modem_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.23999999463558197,
+        1.1480000019073486,
+        0.7699999809265137
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_led_modem_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.20000000298023224,
+        1.1480000019073486,
+        0.7699999809265137
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_led_modem_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.1599999964237213,
+        1.1480000019073486,
+        0.7699999809265137
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_led_modem_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.11999999731779099,
+        1.1480000019073486,
+        0.7699999809265137
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_screen_alarm",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.38999998569488525,
+        1.1920000314712524,
+        0.699999988079071
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_screen_crt",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.6667652130126953,
+        -1.0089895725250244,
+        0.7516000270843506
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_screen_flip",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.44999998807907104,
+        1.277999997138977,
+        0.7799999713897705
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "EMIT_screen_mac",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": "INT_mac",
+      "position": [
+        -1.0099999904632568,
+        1.013005018234253,
+        0.9318593144416809
+      ],
+      "role": "emit"
+    },
+    {
+      "name": "Exterior_Crossarm",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.6000000238418579,
+        4.5,
+        2.0999999046325684
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_FenceRail",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.75,
+        4.190000057220459,
+        -0.30000001192092896
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_FenceRail.001",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.75,
+        4.190000057220459,
+        0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.5699999928474426,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.39400002360343933,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_02",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.21799993515014648,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_03",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.04199998080730438,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_04",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.1339999884366989,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_05",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.3100000023841858,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_06",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.4859999716281891,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_07",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.6620000004768372,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_08",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.8379999995231628,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_09",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.0140000581741333,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_10",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.190000057220459,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_11",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.3659999370574951,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_12",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.5419999361038208,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_13",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.7179999351501465,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_14",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.8940000534057617,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Fence_15",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        2.069999933242798,
+        4.150000095367432,
+        -0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_House_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.21000002324581146,
+        4.710000038146973,
+        0.30000001192092896
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_House_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.7799999713897705,
+        4.889999866485596,
+        0.38999998569488525
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_House_02",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.6349999904632568,
+        4.800000190734863,
+        0.2849999964237213
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Powerline_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Powerline_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Roof_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.21000002324581146,
+        4.710000038146973,
+        0.671999990940094
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Roof_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.7799999713897705,
+        4.889999866485596,
+        0.8519999980926514
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Roof_02",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.6349999904632568,
+        4.800000190734863,
+        0.6420000195503235
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_UtilityPole",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.6000000238418579,
+        4.5,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_00_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.367499977350235,
+        4.458899974822998,
+        0.38999998569488525
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_00_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        -0.052499957382678986,
+        4.458899974822998,
+        0.38999998569488525
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_01_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.6225000023841858,
+        4.638899803161621,
+        0.5070000290870667
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_01_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        0.9375,
+        4.638899803161621,
+        0.5070000290870667
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_02_00",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.4774999618530273,
+        4.548900127410889,
+        0.37049999833106995
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Exterior_Window_02_01",
+      "type": "MESH",
+      "zone": "exterior",
+      "parent": null,
+      "position": [
+        1.7925000190734863,
+        4.548900127410889,
+        0.37049999833106995
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Fan_Base",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_summer_fan",
+      "position": [
+        0.1899999976158142,
+        -0.3700000047683716,
+        0.07999999821186066
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Fan_Guard",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "ANIM_fan_head",
+      "position": [
+        0.1899999976158142,
+        -0.3500000238418579,
+        0.5299999713897705
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Fan_Stem",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_summer_fan",
+      "position": [
+        0.1899999976158142,
+        -0.3700000047683716,
+        0.27000001072883606
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Figurine_Body_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        0.5,
+        2.4600000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Figurine_Body_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        0.800000011920929,
+        2.4600000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Figurine_Head_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        0.5,
+        2.5899999141693115
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Figurine_Head_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        0.800000011920929,
+        2.5899999141693115
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -2.0,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.7649999856948853,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.5299999713897705,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.2949999570846558,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.059999942779541,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_05",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.824999988079071,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_06",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.5899999737739563,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_07",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.35499998927116394,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_08",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.11999999731779099,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_09",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.11500000208616257,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_10",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.3499999940395355,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_11",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.5849999785423279,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_12",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.8199999928474426,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_13",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0549999475479126,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_14",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.2899999618530273,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_15",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.524999976158142,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_16",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.7599999904632568,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floor_Plank_17",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.9950000047683716,
+        0.0,
+        0.004999999888241291
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floppy_Box",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.07000000029802322,
+        1.3600000143051147,
+        0.7699999809265137
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floppy_Disk_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.11999999731779099,
+        1.3600000143051147,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floppy_Disk_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.0949999988079071,
+        1.3600000143051147,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floppy_Disk_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.07000000029802322,
+        1.3600000143051147,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Floppy_Disk_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.04500000178813934,
+        1.3600000143051147,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "GameConsole_Body",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.79659104347229,
+        -0.7235053777694702,
+        0.5302000045776367
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Game_Controller",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.1299999952316284,
+        -1.2300000190734863,
+        0.09000000357627869
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Game_ControllerGrip",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.184999942779541,
+        -1.2699999809265137,
+        0.07999999821186066
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Game_ControllerGrip.001",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.0750000476837158,
+        -1.2699999809265137,
+        0.07999999821186066
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Globe_Sphere",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8600000143051147,
+        0.03999999910593033,
+        2.549999952316284
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Globe_Stand",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8600000143051147,
+        0.03999999910593033,
+        2.375
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Headphones_Band",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Headphones_Earcup",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.25,
+        0.5699999928474426,
+        0.75
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Headphones_Earcup.001",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.2199999988079071,
+        0.6399999856948853,
+        0.75
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Heater_Grille_00",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.3199999928474426,
+        0.21699999272823334,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Heater_Grille_01",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.38499999046325684,
+        0.21699999272823334,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Heater_Grille_02",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.44999998807907104,
+        0.21699999272823334,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Heater_Grille_03",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.5149999856948853,
+        0.21699999272823334,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Heater_Grille_04",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.5799999833106995,
+        0.21699999272823334,
+        0.25
+      ],
+      "role": "static"
+    },
+    {
+      "name": "INT_calendar",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.05000000074505806,
+        0.8799999952316284,
+        0.7900000214576721
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_cat",
+      "type": "EMPTY",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.03999999910593033,
+        -1.1699999570846558,
+        0.23000000417232513
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_ceiling_pullcord",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_clock_flip",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.44999998807907104,
+        1.3300000429153442,
+        0.7799999713897705
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_clock_wall",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.003999948501587,
+        -1.4700000286102295,
+        2.0
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_dvd",
+      "type": "EMPTY",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.6736137866973877,
+        -0.8363862037658691,
+        0.40720000863075256
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_lamp_desk",
+      "type": "EMPTY",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.6200000047683716,
+        1.190000057220459,
+        0.7200000286102295
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_lava_lamp",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        1.7599999904632568,
+        -1.1799999475479126,
+        1.0199999809265137
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_mac",
+      "type": "EMPTY",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.0099999904632568,
+        1.1200000047683716,
+        0.7200000286102295
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_phone",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.6299999952316284,
+        0.8299999833106995,
+        0.7599999904632568
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_tv_crt",
+      "type": "EMPTY",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.7200000286102295,
+        -0.7900000214576721,
+        0.029999999329447746
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_vcr",
+      "type": "EMPTY",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.6678155660629272,
+        -0.8305879235267639,
+        0.31700000166893005
+      ],
+      "role": "int"
+    },
+    {
+      "name": "INT_window",
+      "type": "EMPTY",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.7000000476837158,
+        1.7000000476837158
+      ],
+      "role": "int"
+    },
+    {
+      "name": "Kettle_Body",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.44999998807907104,
+        0.3799999952316284,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Kettle_Handle",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Kettle_Spout",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.5699999928474426,
+        0.3799999952316284,
+        0.6050000190734863
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Base",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0,
+        0.7599999904632568,
+        0.7409999966621399
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.2000000476837158,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.156000018119812,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.1119999885559082,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0679999589920044,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0240000486373901,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_05",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9800000190734863,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_06",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9359999895095825,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_07",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8920000195503235,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_08",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8479999899864197,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_00_09",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8040000200271606,
+        0.699999988079071,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.2000000476837158,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.156000018119812,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.1119999885559082,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0679999589920044,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0240000486373901,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_05",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9800000190734863,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_06",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9359999895095825,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_07",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8920000195503235,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_08",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8479999899864197,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_01_09",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8040000200271606,
+        0.75,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.2000000476837158,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.156000018119812,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.1119999885559082,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0679999589920044,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0240000486373901,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_05",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9800000190734863,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_06",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.9359999895095825,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_07",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8920000195503235,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_08",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8479999899864197,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Keyboard_Key_02_09",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8040000200271606,
+        0.800000011920929,
+        0.7649999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LIGHT_ceiling",
+      "type": "EMPTY",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.20000000298023224,
+        0.5,
+        2.5199999809265137
+      ],
+      "role": "light"
+    },
+    {
+      "name": "LIGHT_desk_lamp",
+      "type": "EMPTY",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.4500000476837158,
+        1.1799999475479126,
+        1.1799999475479126
+      ],
+      "role": "light"
+    },
+    {
+      "name": "LIGHT_heater",
+      "type": "EMPTY",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.44999998807907104,
+        0.20000000298023224,
+        0.30000001192092896
+      ],
+      "role": "light"
+    },
+    {
+      "name": "LIGHT_lava_lamp",
+      "type": "EMPTY",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        1.7599999904632568,
+        -1.1799999475479126,
+        1.100000023841858
+      ],
+      "role": "light"
+    },
+    {
+      "name": "LIGHT_string_lights",
+      "type": "EMPTY",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.5800000429153442,
+        2.4800000190734863
+      ],
+      "role": "light"
+    },
+    {
+      "name": "Lamp_Base",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_lamp_desk",
+      "position": [
+        -1.6200000047683716,
+        1.190000057220459,
+        0.7325000166893005
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lamp_LowerArm",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_lamp_desk",
+      "position": [
+        -1.6299999952316284,
+        1.190000057220459,
+        0.9000000357627869
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lamp_Shade",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_lamp_desk",
+      "position": [
+        -1.4500000476837158,
+        1.190000057220459,
+        1.2599998712539673
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lamp_UpperArm",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_lamp_desk",
+      "position": [
+        -1.5550000667572021,
+        1.190000057220459,
+        1.1649999618530273
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lamp_Warm",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.4500000476837158,
+        1.1799999475479126,
+        1.1099998950958252
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LavaLamp_Base",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        1.7599999904632568,
+        -1.1799999475479126,
+        0.8299999833106995
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lego_Block_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        1.1200000047683716,
+        2.359999895095825
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lego_Block_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        1.1200000047683716,
+        2.4149999618530273
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lego_Block_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        1.1200000047683716,
+        2.4700000286102295
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Lego_Block_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        1.1200000047683716,
+        2.5250000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.6100000143051147,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.5219999551773071,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.434000015258789,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.3459999561309814,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_04",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.2580000162124634,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_05",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.1699999570846558,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_06",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.0820000171661377,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_00_07",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -0.9940000176429749,
+        0.23000000417232513
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.6100000143051147,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.5219999551773071,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.434000015258789,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.3459999561309814,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_04",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.2580000162124634,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_05",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.1699999570846558,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_06",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -1.0820000171661377,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Book_01_07",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5800000429153442,
+        -0.9940000176429749,
+        0.5400000214576721
+      ],
+      "role": "static"
+    },
+    {
+      "name": "LowBookshelf_Main",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.7999999523162842,
+        -1.2599999904632568,
+        0.4000000059604645
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mac_Body",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_mac",
+      "position": [
+        -1.0099999904632568,
+        1.1541708707809448,
+        0.9045225977897644
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mac_DriveSlot",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_mac",
+      "position": [
+        -1.0031658411026,
+        1.0318392515182495,
+        0.8020100593566895
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mac_Foot",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_mac",
+      "position": [
+        -1.0099999904632568,
+        1.1200000047683716,
+        0.7405025362968445
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mac_ScreenBacking",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_mac",
+      "position": [
+        -1.0099999904632568,
+        1.0250049829483032,
+        0.9318593144416809
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mac_ScreenInset",
+      "type": "MESH",
+      "zone": "base",
+      "parent": "INT_mac",
+      "position": [
+        -1.0099999904632568,
+        1.0332059860229492,
+        0.9318593144416809
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Magazine_Floor_00",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.9693127870559692,
+        -1.2200000286102295,
+        0.04500000178813934
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Magazine_Floor_01",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.9684709906578064,
+        -1.1100000143051147,
+        0.05700000002980232
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Magazine_Floor_02",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.8937506079673767,
+        -1.0,
+        0.0689999982714653
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Magazine_Floor_03",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        0.7198340892791748,
+        -0.8899999856948853,
+        0.08100000023841858
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Manual_Shelf_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        -0.23000000417232513,
+        2.369999885559082
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Manual_Shelf_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        -0.23000000417232513,
+        2.3919999599456787
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Manual_Shelf_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.850000023841858,
+        -0.23000000417232513,
+        2.4140000343322754
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Modem_Body",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.1599999964237213,
+        1.2300000190734863,
+        0.7599999904632568
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mouse_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.6299999952316284,
+        0.7599999904632568,
+        0.7450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Mug_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.3400000035762787,
+        0.9599999785423279,
+        0.7750000357627869
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Nightlight_Shade",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.28999999165534973,
+        1.4800000190734863,
+        0.8650000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Nightlight_Stem",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.28999999165534973,
+        1.4800000190734863,
+        0.7350000143051147
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Nightstand_Drawer",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.41999998688697815,
+        1.0859999656677246,
+        0.3799999952316284
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Nightstand_Main",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.41999998688697815,
+        1.3200000524520874,
+        0.3400000035762787
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Nightstand_Water",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.5299999713897705,
+        1.399999976158142,
+        0.699999988079071
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Noodles_Bowl",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.4000000059604645,
+        0.8399999737739563,
+        0.7749999761581421
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Noodles_ChopstickA",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.3700000047683716,
+        0.8149999976158142,
+        0.8400000333786011
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Noodles_ChopstickB",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.3700000047683716,
+        0.8350000381469727,
+        0.8400000333786011
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Notebook_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.36000001430511475,
+        1.2200000286102295,
+        0.7400000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Paper_Crumpled_00",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -1.649999976158142,
+        0.18000000715255737,
+        0.054999999701976776
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Paper_Crumpled_01",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -1.8600000143051147,
+        0.07999999821186066,
+        0.04500000178813934
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Paper_Crumpled_02",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -1.7799999713897705,
+        0.4099999964237213,
+        0.3199999928474426
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.8250000476837158,
+        1.3550000190734863,
+        0.8929811120033264
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.808500051498413,
+        1.3550000190734863,
+        0.8992069959640503
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.7920000553131104,
+        1.3550000190734863,
+        0.8911970853805542
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.7755000591278076,
+        1.3550000190734863,
+        0.8910176753997803
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_04",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.7590000629425049,
+        1.3550000190734863,
+        0.8912440538406372
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Pencil_Cup",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.7899999618530273,
+        1.350000023841858,
+        0.7950000166893005
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Phone_Receiver",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.6399999856948853,
+        0.8399999737739563,
+        0.8149999976158142
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_00",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.1600000858306885,
+        -1.1399999856948853,
+        0.9064821600914001
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_01",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.3299999237060547,
+        -0.8455513715744019,
+        0.9100767970085144
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_02",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.669999837875366,
+        -0.8455513715744019,
+        0.9893530607223511
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_03",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.8399999141693115,
+        -1.1399999856948853,
+        0.8377439975738525
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_04",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.669999837875366,
+        -1.4344485998153687,
+        0.9235613942146301
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Leaf_05",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.3299999237060547,
+        -1.4344485998153687,
+        0.8262931704521179
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Pot",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -2.5,
+        -1.1399999856948853,
+        0.2199999988079071
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_00",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_01",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_02",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_03",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_04",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Foreground_Stem_05",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -0.5799999833106995,
+        0.47999998927116394,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.25,
+        1.600000023841858,
+        2.439359664916992
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1799999475479126,
+        1.6866025924682617,
+        2.4435665607452393
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf.002",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0399999618530273,
+        1.6866025924682617,
+        2.4245927333831787
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf.003",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.9700000286102295,
+        1.600000023841858,
+        2.36474347114563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf.004",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0399999618530273,
+        1.513397455215454,
+        2.3995537757873535
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Leaf.005",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1799999475479126,
+        1.513397455215454,
+        2.421923875808716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Pot",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1100000143051147,
+        1.600000023841858,
+        2.1599998474121094
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1800000667572021,
+        1.600000023841858,
+        2.339679718017578
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1449999809265137,
+        1.643301248550415,
+        2.341783285140991
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem.002",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0750000476837158,
+        1.643301248550415,
+        2.332296371459961
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem.003",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0399999618530273,
+        1.600000023841858,
+        2.3023717403411865
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem.004",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0750000476837158,
+        1.5566987991333008,
+        2.319777011871338
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Stem.005",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.1449999809265137,
+        1.5566987991333008,
+        2.3309619426727295
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_00",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.4494999647140503,
+        1.5399999618530273,
+        1.2804088592529297
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_01",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.5047500133514404,
+        1.6356958150863647,
+        1.297012209892273
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_02",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.6152499914169312,
+        1.6356958150863647,
+        1.2785063982009888
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_03",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.6705000400543213,
+        1.5399999618530273,
+        1.253952145576477
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_04",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.6152499914169312,
+        1.4443042278289795,
+        1.2663007974624634
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Leaf_05",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.5047500133514404,
+        1.4443042278289795,
+        1.2924879789352417
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Pot",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -1.559999942779541,
+        1.5399999618530273,
+        1.059999942779541
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_00",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_01",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_02",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_03",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_04",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Plant_Windowsill_Stem_05",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.0190000534057617,
+        -0.949999988079071,
+        1.7400000095367432
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.0190000534057617,
+        -0.36000001430511475,
+        1.6299999952316284
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.0190000534057617,
+        0.25999999046325684,
+        1.809999942779541
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Caption_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.996000051498413,
+        -0.949999988079071,
+        1.541599988937378
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Caption_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.996000051498413,
+        -0.36000001430511475,
+        1.479599952697754
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Caption_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.996000051498413,
+        0.25999999046325684,
+        1.6275999546051025
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Moon_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.005000114440918,
+        -0.949999988079071,
+        1.8200000524520874
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Moon_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.005000114440918,
+        -0.36000001430511475,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Poster_Moon_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        2.005000114440918,
+        0.25999999046325684,
+        1.8899999856948853
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Main",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6399999856948853,
+        1.4500000476837158,
+        0.07199999690055847
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.800000011920929,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.699999988079071,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6000000238418579,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_04",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.5,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "PowerStrip_Plug_05",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.4000000059604645,
+        1.4500000476837158,
+        0.11500000208616257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Room_Fill",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -3.0,
+        -3.0,
+        4.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Room_Foundation",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        -0.14000000059604645
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Rug_FrayedEdge",
+      "type": "MESH",
+      "zone": "extras",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Rug_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.11999999731779099,
+        -0.5299999713897705,
+        0.04399999976158142
+      ],
+      "role": "static"
+    },
+    {
+      "name": "SEASON_autumn_blanket",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        -0.9200000166893005,
+        -0.009999999776482582,
+        0.7699999809265137
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SEASON_spring_flowerpot",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        -0.3199999928474426,
+        1.600000023841858,
+        1.0
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SEASON_summer_fan",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        0.1899999976158142,
+        -0.3700000047683716,
+        0.05000000074505806
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SEASON_summer_iceddrink",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        -0.25,
+        1.100000023841858,
+        0.800000011920929
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SEASON_winter_heater",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        0.44999998807907104,
+        0.3799999952316284,
+        0.25
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SEASON_winter_scarf",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        1.8300000429153442,
+        1.5800000429153442,
+        0.9800000190734863
+      ],
+      "role": "season"
+    },
+    {
+      "name": "SOCKET_cat_bed",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        1.600000023841858,
+        0.699999988079071,
+        0.8199999928474426
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_cat_fan",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        0.2199999988079071,
+        -0.699999988079071,
+        0.10000000149011612
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_cat_heater",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        0.6499999761581421,
+        0.10000000149011612,
+        0.11999999731779099
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_cat_windowsill",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": null,
+      "position": [
+        -0.6800000071525574,
+        1.559999942779541,
+        1.0299999713897705
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_kettle_steam",
+      "type": "EMPTY",
+      "zone": "seasonal",
+      "parent": "SEASON_winter_heater",
+      "position": [
+        0.6100000143051147,
+        0.3799999952316284,
+        0.6499999761581421
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_petals_window",
+      "type": "EMPTY",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.7000000476837158,
+        1.899999976158142
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_rain_window",
+      "type": "EMPTY",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.8200000524520874,
+        2.4000000953674316
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_steam_mug",
+      "type": "EMPTY",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.3400000035762787,
+        0.9599999785423279,
+        0.8600000143051147
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "SOCKET_windchime",
+      "type": "EMPTY",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.10000000149011612,
+        1.5499999523162842,
+        2.3499999046325684
+      ],
+      "role": "socket"
+    },
+    {
+      "name": "ScreenBounce_Crt",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.646690011024475,
+        -1.0376598834991455,
+        0.7516000270843506
+      ],
+      "role": "static"
+    },
+    {
+      "name": "ScreenBounce_Mac",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.0099999904632568,
+        0.9780049920082092,
+        0.9318593144416809
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.3100000023841858,
+        1.600000023841858,
+        2.1781857013702393
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.382999986410141,
+        1.600000023841858,
+        2.179962158203125
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.4560000002384186,
+        1.600000023841858,
+        2.209643602371216
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.5289999842643738,
+        1.600000023841858,
+        2.2345876693725586
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.6019999980926514,
+        1.600000023841858,
+        2.2135941982269287
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_05",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.675000011920929,
+        1.600000023841858,
+        2.237919569015503
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Book_06",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.7480000257492065,
+        1.600000023841858,
+        2.1820199489593506
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Shelf_Main",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.7799999713897705,
+        1.6100000143051147,
+        2.0399999618530273
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Skateboard_Axle",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5299999713897705,
+        -1.6699999570846558,
+        0.15000000596046448
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Skateboard_Axle.001",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5299999713897705,
+        -1.6699999570846558,
+        0.550000011920929
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Skateboard_Deck",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.5299999713897705,
+        -1.6299999952316284,
+        0.3499999940395355
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Skirting_Back",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.0,
+        1.7000000476837158,
+        0.09000000357627869
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Skirting_Right",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        2.0,
+        0.0,
+        0.09000000357627869
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Slipper_00",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        0.8600000143051147,
+        -0.7099999785423279,
+        0.07000000029802322
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Slipper_01",
+      "type": "MESH",
+      "zone": "bed",
+      "parent": null,
+      "position": [
+        1.0700000524520874,
+        -0.7099999785423279,
+        0.07000000029802322
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Speaker_0",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.3799999952316284,
+        1.3200000524520874,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Speaker_1",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6499999761581421,
+        1.3200000524520874,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Speaker_Cone_0",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.3799999952316284,
+        1.24399995803833,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Speaker_Cone_1",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6499999761581421,
+        1.24399995803833,
+        0.8399999737739563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Blossom",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.38999998569488525,
+        1.590000033378601,
+        1.2899999618530273
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Blossom.001",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.23999999463558197,
+        1.6399999856948853,
+        1.2999999523162842
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_00",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.21799999475479126,
+        1.600000023841858,
+        1.260390043258667
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_01",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.26899999380111694,
+        1.688334584236145,
+        1.2770493030548096
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_02",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.3709999918937683,
+        1.688334584236145,
+        1.26714026927948
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_03",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.421999990940094,
+        1.600000023841858,
+        1.2558908462524414
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_04",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.3709999918937683,
+        1.5116654634475708,
+        1.2611225843429565
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Leaf_05",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.26899999380111694,
+        1.5116654634475708,
+        1.2990326881408691
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Pot",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        -0.3199999928474426,
+        1.600000023841858,
+        1.059999942779541
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_00",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_01",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_02",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_03",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_04",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Spring_Flowers_Stem_05",
+      "type": "MESH",
+      "zone": "seasonal",
+      "parent": "SEASON_spring_flowerpot",
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Desk_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.75,
+        0.9900000095367432,
+        0.7269999980926514
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Desk_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.6200000047683716,
+        0.9900000095367432,
+        0.7269999980926514
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Desk_02",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.49000000953674316,
+        0.9900000095367432,
+        0.7269999980926514
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Desk_03",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.36000001430511475,
+        0.9900000095367432,
+        0.7269999980926514
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Mac_00",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -1.0950000286102295,
+        1.010004997253418,
+        1.0218592882156372
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sticky_Mac_01",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.9350000023841858,
+        1.010004997253418,
+        1.0218592882156372
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_00",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.809999942779541,
+        1.5099999904632568,
+        2.509999990463257
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_01",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.6699999570846558,
+        1.5099999904632568,
+        2.4584624767303467
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_02",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.5299999713897705,
+        1.5099999904632568,
+        2.431164026260376
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_03",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.3899999856948853,
+        1.5099999904632568,
+        2.4409432411193848
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_04",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.25,
+        1.5099999904632568,
+        2.483201026916504
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_05",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -1.1100000143051147,
+        1.5099999904632568,
+        2.538062572479248
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_06",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.9700000286102295,
+        1.5099999904632568,
+        2.579725980758667
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_07",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.8299999833106995,
+        1.5099999904632568,
+        2.5885961055755615
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_08",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.6899999976158142,
+        1.5099999904632568,
+        2.5605013370513916
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_09",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.550000011920929,
+        1.5099999904632568,
+        2.508654832839966
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_10",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.4099999964237213,
+        1.5099999904632568,
+        2.4574410915374756
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_11",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.27000001072883606,
+        1.5099999904632568,
+        2.4309465885162354
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_12",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        -0.12999999523162842,
+        1.5099999904632568,
+        2.441632032394409
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Bulb_13",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.009999999776482582,
+        1.5099999904632568,
+        2.4844720363616943
+      ],
+      "role": "static"
+    },
+    {
+      "name": "StringLights_Wire",
+      "type": "MESH",
+      "zone": "lights",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Sun_Evening",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -3.0,
+        5.0,
+        4.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Branch_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.1100000143051147,
+        3.2750000953674316,
+        1.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Branch_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.5600000023841858,
+        3.299999952316284,
+        1.100000023841858
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Branch_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8100000023841858,
+        3.3499999046325684,
+        1.3000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Branch_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.2100000381469727,
+        3.4000000953674316,
+        1.3000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Branch_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.38499999046325684,
+        3.4000000953674316,
+        1.3000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Canopy_00",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.399999976158142,
+        3.25,
+        1.399999976158142
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Canopy_01",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.30000001192092896,
+        3.299999952316284,
+        1.600000023841858
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Canopy_02",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.800000011920929,
+        3.4000000953674316,
+        2.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Canopy_03",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.600000023841858,
+        3.5,
+        2.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Canopy_04",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.05000000074505806,
+        3.5,
+        2.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tree_Trunk",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8500000238418579,
+        3.299999952316284,
+        0.12500008940696716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "TvStand_Main",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.7200000286102295,
+        -0.7900000214576721,
+        0.267799973487854
+      ],
+      "role": "static"
+    },
+    {
+      "name": "TvStand_Shelf",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5859551429748535,
+        -0.9814358353614807,
+        0.24319998919963837
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Tv_Remote",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": null,
+      "position": [
+        -1.0,
+        -1.4800000190734863,
+        0.054999999701976776
+      ],
+      "role": "static"
+    },
+    {
+      "name": "UnderBed_Storage_00",
+      "type": "MESH",
+      "zone": "extras",
+      "parent": null,
+      "position": [
+        1.0,
+        -0.5099999904632568,
+        0.18000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "UnderBed_Storage_01",
+      "type": "MESH",
+      "zone": "extras",
+      "parent": null,
+      "position": [
+        1.2999999523162842,
+        -0.5099999904632568,
+        0.18000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "UnderBed_Storage_02",
+      "type": "MESH",
+      "zone": "extras",
+      "parent": null,
+      "position": [
+        1.600000023841858,
+        -0.5099999904632568,
+        0.18000000715255737
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_Body",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_vcr",
+      "position": [
+        -1.6678155660629272,
+        -0.8305879235267639,
+        0.31700000166893005
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_ExtraTape_00",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.5794000029563904
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_ExtraTape_01",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.60235995054245
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_ExtraTape_02",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6253199577331543
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_ExtraTape_03",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6482799649238586
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_ExtraTape_04",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.671239972114563
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_HandLabel_00",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.5908799767494202
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_HandLabel_01",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6138399839401245
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_HandLabel_02",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6367999911308289
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_HandLabel_03",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6597599983215332
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_HandLabel_04",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.5097718238830566,
+        -0.5326827168464661,
+        0.6827199459075928
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_Tape_00",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.4385600090026855,
+        -0.5629023909568787,
+        0.5302000045776367
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_Tape_01",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.4385600090026855,
+        -0.5629023909568787,
+        0.5531599521636963
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Vhs_Tape_02",
+      "type": "MESH",
+      "zone": "tv",
+      "parent": "INT_tv_crt",
+      "position": [
+        -1.4385600090026855,
+        -0.5629023909568787,
+        0.5761199593544006
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Walkman_Body",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        -0.12999999523162842,
+        0.6700000166893005,
+        0.75
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallClock_Face",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.9809999465942383,
+        -1.4700000286102295,
+        2.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_00",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.8999999761581421,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_01",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.8550000190734863,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_02",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.8100000023841858,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_03",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.7649999856948853,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_04",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.7200000286102295,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_05",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.675000011920929,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_06",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.6299999952316284,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_07",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.5849999785423279,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_08",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.5400000214576721,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Cd_09",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        -0.4950000047683716,
+        2.450000047683716
+      ],
+      "role": "static"
+    },
+    {
+      "name": "WallShelf_Long",
+      "type": "MESH",
+      "zone": "right-wall",
+      "parent": null,
+      "position": [
+        1.8700000047683716,
+        0.20000000298023224,
+        2.299999952316284
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_BackLeft",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.940000057220459,
+        1.7999999523162842,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_BackLower",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.0,
+        1.7999999523162842,
+        0.49000000953674316
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_BackRight",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        1.0399999618530273,
+        1.7999999523162842,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_BackUpper",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        0.0,
+        1.7999999523162842,
+        2.619999885559082
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_Outlet",
+      "type": "MESH",
+      "zone": "desk",
+      "parent": null,
+      "position": [
+        0.14000000059604645,
+        1.6699999570846558,
+        0.23999999463558197
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wall_Right",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        2.0999999046325684,
+        0.0,
+        1.399999976158142
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Wastebasket_Main",
+      "type": "MESH",
+      "zone": "floor",
+      "parent": null,
+      "position": [
+        -1.8600000143051147,
+        0.3799999952316284,
+        0.17000000178813934
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windchime_Cord",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windchime_Tube_00",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.15000000596046448,
+        1.5499999523162842,
+        2.0199999809265137
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windchime_Tube_01",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.10000000149011612,
+        1.5499999523162842,
+        2.007499933242798
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windchime_Tube_02",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.05000000074505806,
+        1.5499999523162842,
+        1.994999885559082
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_FrameRail",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.7000000476837158,
+        0.9800000190734863
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_FrameRail.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.7000000476837158,
+        2.440000057220459
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_FrameSide",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -1.7699999809265137,
+        1.7000000476837158,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_FrameSide.001",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.029999999329447746,
+        1.7000000476837158,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_Mullion",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.7000000476837158,
+        1.7100000381469727
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_Sill",
+      "type": "MESH",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.6100000143051147,
+        0.9599999785423279
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Window_Soft",
+      "type": "LIGHT",
+      "zone": "base",
+      "parent": null,
+      "position": [
+        -0.8999999761581421,
+        1.600000023841858,
+        2.0
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windowsill_Figurine",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.3400000035762787,
+        1.5499999523162842,
+        1.090000033378601
+      ],
+      "role": "static"
+    },
+    {
+      "name": "Windowsill_FigurineHead",
+      "type": "MESH",
+      "zone": "window",
+      "parent": null,
+      "position": [
+        -0.28999999165534973,
+        1.5499999523162842,
+        1.149999976158142
+      ],
+      "role": "static"
+    }
+  ]
+}

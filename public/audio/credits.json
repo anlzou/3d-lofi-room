@@ -1,0 +1,11 @@
+{
+  "title": "Window Seat / 窗边留座",
+  "bpm": 76,
+  "bars": 32,
+  "seconds": 101.052625,
+  "sampleRate": 32000,
+  "peak": 0.72,
+  "rms": 0.13951708874081137,
+  "original": true,
+  "samples": "All instruments synthesized in compose_bgm.py; no external recordings."
+}

@@ -1,0 +1,685 @@
+[
+  {
+    "key": "TV",
+    "label": "CRT + tilted cabinet",
+    "zone": "tv",
+    "objects": [
+      "TvStand_Main",
+      "TvStand_Shelf",
+      "Crt_Body",
+      "Crt_Bezel",
+      "Crt_ScreenBacking",
+      "Crt_AntennaLeft",
+      "Crt_AntennaRight",
+      "Vhs_Body",
+      "Vhs_Tape_00",
+      "Vhs_Tape_01",
+      "Vhs_Tape_02",
+      "EMIT_screen_crt"
+    ],
+    "priority": "P0",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "VCR",
+    "label": "VHS recorder / door",
+    "zone": "tv",
+    "objects": [
+      "Vhs_Body",
+      "ANIM_vcr_door"
+    ],
+    "priority": "P0",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "DVD",
+    "label": "DVD player / tray",
+    "zone": "tv",
+    "objects": [
+      "ANIM_dvd_tray",
+      "Dvd_Body"
+    ],
+    "priority": "P0",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "TAPES",
+    "label": "VHS labels / DVD cases",
+    "zone": "tv",
+    "objects": [
+      "Vhs_ExtraTape_00",
+      "Vhs_HandLabel_00",
+      "Vhs_ExtraTape_01",
+      "Vhs_HandLabel_01",
+      "Vhs_ExtraTape_02",
+      "Vhs_HandLabel_02",
+      "Vhs_ExtraTape_03",
+      "Vhs_HandLabel_03",
+      "Vhs_ExtraTape_04",
+      "Vhs_HandLabel_04",
+      "Dvd_Case_00",
+      "Dvd_Case_01",
+      "Dvd_Case_02",
+      "Dvd_Case_03"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "GAME",
+    "label": "Console / controller / cable / remote",
+    "zone": "tv",
+    "objects": [
+      "GameConsole_Body",
+      "Game_Controller",
+      "Tv_Remote",
+      "Cable_GameController"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "DESK",
+    "label": "Desk 0.72m / Mac 0.34m",
+    "zone": "desk",
+    "objects": [
+      "Desk_Main",
+      "EMIT_screen_mac",
+      "INT_mac"
+    ],
+    "priority": "P0",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "KEYS",
+    "label": "Keyboard / mouse",
+    "zone": "desk",
+    "objects": [
+      "Keyboard_Base",
+      "Keyboard_Key_00_00",
+      "Keyboard_Key_00_01",
+      "Keyboard_Key_00_02",
+      "Keyboard_Key_00_03",
+      "Keyboard_Key_00_04",
+      "Keyboard_Key_00_05",
+      "Keyboard_Key_00_06",
+      "Keyboard_Key_00_07",
+      "Keyboard_Key_00_08",
+      "Keyboard_Key_00_09",
+      "Keyboard_Key_01_00",
+      "Keyboard_Key_01_01",
+      "Keyboard_Key_01_02",
+      "Keyboard_Key_01_03",
+      "Keyboard_Key_01_04",
+      "Keyboard_Key_01_05",
+      "Keyboard_Key_01_06",
+      "Keyboard_Key_01_07",
+      "Keyboard_Key_01_08",
+      "Keyboard_Key_01_09",
+      "Keyboard_Key_02_00",
+      "Keyboard_Key_02_01",
+      "Keyboard_Key_02_02",
+      "Keyboard_Key_02_03",
+      "Keyboard_Key_02_04",
+      "Keyboard_Key_02_05",
+      "Keyboard_Key_02_06",
+      "Keyboard_Key_02_07",
+      "Keyboard_Key_02_08",
+      "Keyboard_Key_02_09",
+      "Mouse_Main"
+    ],
+    "priority": "P0",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "TASKLAMP",
+    "label": "Task lamp",
+    "zone": "desk",
+    "objects": [
+      "INT_lamp_desk"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "TOWER",
+    "label": "Computer tower",
+    "zone": "desk",
+    "objects": [
+      "Computer_Tower",
+      "Computer_Drive"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "MODEM",
+    "label": "Modem / coiled phone cable",
+    "zone": "desk",
+    "objects": [
+      "Modem_Body",
+      "INT_phone",
+      "Cable_Phone_Coil"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "SPEAKERS",
+    "label": "Pair of speakers",
+    "zone": "desk",
+    "objects": [
+      "Speaker_0",
+      "Speaker_Cone_0",
+      "Speaker_1",
+      "Speaker_Cone_1"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "CLOCK",
+    "label": "Flip clock / calendar",
+    "zone": "desk",
+    "objects": [
+      "INT_clock_flip",
+      "EMIT_screen_flip",
+      "INT_calendar"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "SNACK",
+    "label": "Noodles / mug / stationery",
+    "zone": "desk",
+    "objects": [
+      "Noodles_Bowl",
+      "Pencil_Cup",
+      "Mug_Main",
+      "Sticky_Desk_00",
+      "Sticky_Desk_01",
+      "Sticky_Desk_02",
+      "Sticky_Desk_03",
+      "Sticky_Mac_00",
+      "Sticky_Mac_01"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "AUDIO",
+    "label": "Walkman / headphones / cable",
+    "zone": "desk",
+    "objects": [
+      "Walkman_Body",
+      "Headphones_Band",
+      "Cable_Headphone"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "DISKS",
+    "label": "Floppy box / loose CDs",
+    "zone": "desk",
+    "objects": [
+      "Floppy_Box",
+      "Cd_Loose_00",
+      "Cd_Loose_01"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "POWER",
+    "label": "Power strip / six device cables / plugs",
+    "zone": "desk",
+    "objects": [
+      "PowerStrip_Main",
+      "Cable_Device_00",
+      "Cable_Device_01",
+      "Cable_Device_02",
+      "Cable_Device_03",
+      "Cable_Device_04",
+      "Cable_Device_05"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "WALLSHELF",
+    "label": "Long wall shelf / CD tower / globe / figures / Lego / manuals",
+    "zone": "right-wall",
+    "objects": [
+      "WallShelf_Long",
+      "WallShelf_Cd_00",
+      "WallShelf_Cd_01",
+      "WallShelf_Cd_02",
+      "WallShelf_Cd_03",
+      "WallShelf_Cd_04",
+      "WallShelf_Cd_05",
+      "WallShelf_Cd_06",
+      "WallShelf_Cd_07",
+      "WallShelf_Cd_08",
+      "WallShelf_Cd_09",
+      "Globe_Sphere",
+      "Figurine_Head_00",
+      "Figurine_Body_00",
+      "Figurine_Head_01",
+      "Figurine_Body_01",
+      "Lego_Block_00",
+      "Lego_Block_01",
+      "Lego_Block_02",
+      "Lego_Block_03",
+      "Manual_Shelf_00",
+      "Manual_Shelf_01",
+      "Manual_Shelf_02"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "POSTERS",
+    "label": "Three skewed posters",
+    "zone": "right-wall",
+    "objects": [
+      "Poster_00",
+      "Poster_Moon_00",
+      "Poster_Caption_00",
+      "Poster_01",
+      "Poster_Moon_01",
+      "Poster_Caption_01",
+      "Poster_02",
+      "Poster_Moon_02",
+      "Poster_Caption_02"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "NOTICE",
+    "label": "Corkboard / photos / notes / tickets",
+    "zone": "right-wall",
+    "objects": [
+      "Corkboard_Main",
+      "Corkboard_Photo_00",
+      "Corkboard_Pin_00",
+      "Corkboard_Photo_01",
+      "Corkboard_Pin_01",
+      "Corkboard_Photo_02",
+      "Corkboard_Pin_02",
+      "Corkboard_Photo_03",
+      "Corkboard_Pin_03",
+      "Corkboard_Photo_04",
+      "Corkboard_Pin_04",
+      "Corkboard_Photo_05",
+      "Corkboard_Pin_05"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "WALLCLOCK",
+    "label": "Wall clock / hands",
+    "zone": "right-wall",
+    "objects": [
+      "INT_clock_wall",
+      "ANIM_clock_hour",
+      "ANIM_clock_minute"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "LOWWALL",
+    "label": "Low bookshelf / skateboard",
+    "zone": "right-wall",
+    "objects": [
+      "LowBookshelf_Main",
+      "Skateboard_Deck"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "BED",
+    "label": "Raised bed / folded duvet / cushion / open comic",
+    "zone": "bed",
+    "objects": [
+      "Bed_Blanket",
+      "Bed_Cushion",
+      "Comic_OpenLeft",
+      "Comic_OpenRight"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "NIGHTSTAND",
+    "label": "Nightstand / alarm / water / nightlight",
+    "zone": "bed",
+    "objects": [
+      "Nightstand_Main",
+      "Alarm_Body",
+      "EMIT_screen_alarm",
+      "Nightlight_Shade"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "SLIPPERS",
+    "label": "Pair of slippers",
+    "zone": "bed",
+    "objects": [
+      "Slipper_00",
+      "Slipper_01"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "CAT",
+    "label": "Cat bed / sleeping cat",
+    "zone": "floor",
+    "objects": [
+      "Cat_Bed",
+      "INT_cat"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "TRASH",
+    "label": "Bin / missed paper balls",
+    "zone": "floor",
+    "objects": [
+      "Wastebasket_Main",
+      "Paper_Crumpled_00",
+      "Paper_Crumpled_01",
+      "Paper_Crumpled_02"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "MAGAZINES",
+    "label": "Scattered magazines",
+    "zone": "floor",
+    "objects": [
+      "Magazine_Floor_00",
+      "Magazine_Floor_01",
+      "Magazine_Floor_02",
+      "Magazine_Floor_03"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "FOREGROUND",
+    "label": "Foreground plant / record crate",
+    "zone": "floor",
+    "objects": [
+      "Plant_Foreground_Pot",
+      "Plant_Foreground_Stem_00",
+      "Plant_Foreground_Leaf_00",
+      "Plant_Foreground_Stem_01",
+      "Plant_Foreground_Leaf_01",
+      "Plant_Foreground_Stem_02",
+      "Plant_Foreground_Leaf_02",
+      "Plant_Foreground_Stem_03",
+      "Plant_Foreground_Leaf_03",
+      "Plant_Foreground_Stem_04",
+      "Plant_Foreground_Leaf_04",
+      "Plant_Foreground_Stem_05",
+      "Plant_Foreground_Leaf_05",
+      "Box_Foreground"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "SILL",
+    "label": "Sill plant / tiny bird figure",
+    "zone": "window",
+    "objects": [
+      "Plant_Windowsill_Pot",
+      "Plant_Windowsill_Stem_00",
+      "Plant_Windowsill_Leaf_00",
+      "Plant_Windowsill_Stem_01",
+      "Plant_Windowsill_Leaf_01",
+      "Plant_Windowsill_Stem_02",
+      "Plant_Windowsill_Leaf_02",
+      "Plant_Windowsill_Stem_03",
+      "Plant_Windowsill_Leaf_03",
+      "Plant_Windowsill_Stem_04",
+      "Plant_Windowsill_Leaf_04",
+      "Plant_Windowsill_Stem_05",
+      "Plant_Windowsill_Leaf_05",
+      "Windowsill_Figurine"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "WINDOW",
+    "label": "Movable blinds / weather sockets / chime",
+    "zone": "window",
+    "objects": [
+      "INT_window",
+      "SOCKET_rain_window",
+      "SOCKET_petals_window",
+      "SOCKET_windchime"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "SEASONS",
+    "label": "Fan / heater / kettle / spring flowers / throw / scarf / iced drink",
+    "zone": "seasonal",
+    "objects": [
+      "SEASON_summer_fan",
+      "SEASON_winter_heater",
+      "SEASON_spring_flowerpot",
+      "SEASON_autumn_blanket",
+      "SEASON_winter_scarf",
+      "SEASON_summer_iceddrink",
+      "SOCKET_kettle_steam"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "CATSOCKETS",
+    "label": "Four cat destinations",
+    "zone": "seasonal",
+    "objects": [
+      "SOCKET_cat_bed",
+      "SOCKET_cat_heater",
+      "SOCKET_cat_windowsill",
+      "SOCKET_cat_fan"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "LIGHTS",
+    "label": "Ceiling / pullcord / string path / lava lamp / five anchors",
+    "zone": "lights",
+    "objects": [
+      "Ceiling_Shade",
+      "StringLights_Wire",
+      "INT_lava_lamp",
+      "LIGHT_desk_lamp",
+      "LIGHT_ceiling",
+      "LIGHT_heater",
+      "LIGHT_string_lights",
+      "LIGHT_lava_lamp"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "OUTSIDE",
+    "label": "Utility pole / wires / houses / fence",
+    "zone": "exterior",
+    "objects": [
+      "Exterior_House_00",
+      "Exterior_Roof_00",
+      "Exterior_Window_00_00",
+      "Exterior_Window_00_01",
+      "Exterior_House_01",
+      "Exterior_Roof_01",
+      "Exterior_Window_01_00",
+      "Exterior_Window_01_01",
+      "Exterior_House_02",
+      "Exterior_Roof_02",
+      "Exterior_Window_02_00",
+      "Exterior_Window_02_01",
+      "Exterior_UtilityPole",
+      "Exterior_Crossarm",
+      "Exterior_Powerline_00",
+      "Exterior_Powerline_01",
+      "Exterior_Fence_00",
+      "Exterior_Fence_01",
+      "Exterior_Fence_02",
+      "Exterior_Fence_03",
+      "Exterior_Fence_04",
+      "Exterior_Fence_05",
+      "Exterior_Fence_06",
+      "Exterior_Fence_07",
+      "Exterior_Fence_08",
+      "Exterior_Fence_09",
+      "Exterior_Fence_10",
+      "Exterior_Fence_11",
+      "Exterior_Fence_12",
+      "Exterior_Fence_13",
+      "Exterior_Fence_14",
+      "Exterior_Fence_15",
+      "Exterior_FenceRail",
+      "Exterior_FenceRail.001"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  },
+  {
+    "key": "EXTRAS",
+    "label": "Underbed boxes / frayed rug edge",
+    "zone": "extras",
+    "objects": [
+      "UnderBed_Storage_00",
+      "UnderBed_Storage_01",
+      "UnderBed_Storage_02",
+      "Rug_FrayedEdge"
+    ],
+    "priority": "P1",
+    "season": "all",
+    "layout": "1.5",
+    "refine": "2",
+    "runtime": "4"
+  }
+]

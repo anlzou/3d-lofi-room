@@ -1,0 +1,19 @@
+{
+  "engine": "Cycles",
+  "samples": 128,
+  "directIncluded": false,
+  "colorIncluded": false,
+  "times": {
+    "dawn": 7.0,
+    "noon": 12.0,
+    "dusk": 17.333333333333332,
+    "night": 0.0
+  },
+  "proxyTriangles": 155185,
+  "sourceTriangles": 79527,
+  "encoding": "sqrt-linear-range-4",
+  "aoSize": 2048,
+  "lightmapSize": 1024,
+  "paddingPixels": 5,
+  "gpuBytesWithMipmaps": 44739243
+}

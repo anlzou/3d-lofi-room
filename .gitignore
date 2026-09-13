@@ -1,0 +1,6 @@
+node_modules/
+dist/
+*.log
+release/
+release-check/
+.build-cache/

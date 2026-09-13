@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#252a30" />
+  <title>3d-lofi-room · 慢慢房间</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/src/style.css" />
+  <!-- The room cannot appear without these, so the downloads start while the bundle is still
+       parsing. The credentials mode has to match the loaders that consume them — three fetches
+       the model as a fetch and the lightmaps as images with crossOrigin="anonymous" — or the
+       browser downloads everything twice instead of reusing the preload. -->
+  <link rel="preload" href="./models/demo.glb" as="fetch" crossorigin="anonymous" />
+  <link rel="preload" href="./lighting/ao.png" as="image" crossorigin="anonymous" />
+  <link rel="preload" href="./lighting/night.png" as="image" crossorigin="anonymous" />
+  <link rel="preload" href="./lighting/dawn.png" as="image" crossorigin="anonymous" />
+  <link rel="preload" href="./lighting/noon.png" as="image" crossorigin="anonymous" />
+  <link rel="preload" href="./lighting/dusk.png" as="image" crossorigin="anonymous" />
+</head>
+<body>
+  <div id="app" aria-label="可旋转的三维房间"></div>
+  <header class="ui masthead"><span class="eyebrow">A LITTLE SPACE, A SLOWER PACE.</span><h1>慢慢房间<span>lofi room</span></h1><p>把时间，留在窗边。</p></header>
+  <aside class="ui chapter"><span class="dot"></span> A ROOM TO STAY <small>光落下来 · 时间慢下来</small></aside>
+  <div class="ui time-mark"><span id="day-label">日间 · DAYLIGHT</span><output id="clock" for="time">11:30</output><span id="season-label">AUTUMN, 2026</span></div>
+  <div class="ui dock" id="dock">
+    <button id="dock-toggle" class="dock-ring" data-drag-handle aria-expanded="false" aria-controls="dock" aria-label="展开或收起控制面板" title="点击展开 · 拖动移动"></button>
+    <section class="console" aria-label="房间控制">
+      <div class="console-title"><span>◉ ROOM CONTROL</span><span class="fine">一段不着急的时光</span><button id="console-reset" class="console-reset" title="控制面板回到默认位置" aria-label="控制面板回到默认位置">⟲</button></div>
+      <div class="time-control"><label for="time">时刻</label><span>00</span><input id="time" type="range" min="0" max="23.99" step="0.01" value="11.5" aria-label="时刻" /><span>24</span></div>
+      <div class="actions"><button id="pause" aria-pressed="false">▷ 时间流动</button><button id="showcase" aria-pressed="false" title="随时间自动开灯关灯，模拟一天的作息">展示模式</button><label class="camera-label">机位<select id="camera" aria-label="机位"><option value="room">01 全景</option><option value="desk">02 桌面</option><option value="window">03 窗边</option><option value="tv">04 电视</option></select></label><button id="fullscreen">全屏 ↗</button><button id="hide" title="按 H 或双击画面恢复">隐藏 H</button></div>
+    </section>
+  </div>
+  <footer class="ui"><div class="status-left"><span id="status" role="status">正在打开房间…</span><progress id="load-progress" max="100" value="0" aria-label="加载进度" hidden></progress><button id="retry" type="button" hidden>重试 ↻</button></div><span id="stats"></span></footer>
+  <div class="ui ambient-hint" id="ambient-hint" role="status">双击屏幕退出隐藏模式</div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "name": "3d-lofi-room",
+  "private": true,
+  "version": "0.2.0",
+  "description": "A quiet miniature 3D lofi room with original music, built to host several scenes",
+  "author": "Lofi Room",
+  "type": "module",
+  "packageManager": "pnpm@11.15.1",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build": "pnpm run typecheck && vite build",
+    "preview": "vite preview",
+    "desktop": "pnpm run build && electron .",
+    "package:win": "pnpm run build && electron-builder --win portable --x64"
+  },
+  "devDependencies": {
+    "@types/three": "^0.185.4",
+    "electron": "^44.2.0",
+    "electron-builder": "^26.15.3",
+    "gltf-validator": "^2.0.0-dev.3.10",
+    "typescript": "^7.0.2",
+    "three": "^0.185.1",
+    "vite": "^8.2.2"
+  },
+  "main": "desktop/main.cjs",
+  "build": {
+    "appId": "local.lofi.room",
+    "productName": "3D Lofi Room",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "desktop/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "3D-Lofi-Room-Portable-0.2.0.exe"
+    }
+  }
+}

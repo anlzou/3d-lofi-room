@@ -1,0 +1,13 @@
+# pnpm 配置（单包项目，仅用于集中管理安装行为）
+
+# 依赖安装脚本白名单：pnpm 默认拒绝执行 postinstall，
+# 这里显式放行必需的几个（其余依赖一律不执行脚本）：
+#   electron            —— 下载 Electron 运行时（打包/桌面调试需要）
+#   electron-winstaller —— 选择对应架构的 7-Zip 组件
+#   esbuild             —— 安装平台二进制
+# 注意：这个文件由 pnpm 维护，新增依赖若被拒绝执行脚本，
+# pnpm 会自动追加 `包名: set this to true or false` 占位行，请按需改为 true/false。
+allowBuilds:
+  electron: true
+  electron-winstaller: true
+  esbuild: true
