@@ -15,7 +15,7 @@ app.whenReady().then(async()=>{
     const mime={'.html':'text/html','.js':'text/javascript','.css':'text/css','.png':'image/png','.glb':'model/gltf-binary','.wasm':'application/wasm','.wav':'audio/wav','.json':'application/json'};
     try{return new Response(await fs.readFile(file),{headers:{'Content-Type':mime[path.extname(file)]||'application/octet-stream','Content-Security-Policy':"default-src 'self'; script-src 'self' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; media-src 'self' blob:; connect-src 'self' blob:; object-src 'none'; base-uri 'none'"}});}catch{return new Response('',{status:404});}
   });
-  const win=new BrowserWindow({width:1280,height:900,minWidth:720,minHeight:600,show:!smoke,title:'3d-lofi-room · 慢慢房间',backgroundColor:'#252a30',autoHideMenuBar:true,webPreferences:{contextIsolation:true,nodeIntegration:false,sandbox:true}});
+  const win=new BrowserWindow({width:1280,height:900,minWidth:720,minHeight:600,show:!smoke,title:'3d-lofi-room · 四季房间',backgroundColor:'#252a30',autoHideMenuBar:true,webPreferences:{contextIsolation:true,nodeIntegration:false,sandbox:true}});
   win.webContents.setWindowOpenHandler(()=>({action:'deny'}));
   win.webContents.on('will-navigate',(e,url)=>{if(!url.startsWith('room://home/'))e.preventDefault();});
   win.webContents.session.setPermissionRequestHandler((_wc,_permission,callback)=>callback(false));

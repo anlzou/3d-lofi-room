@@ -1,6 +1,6 @@
 # 目录与资产契约
 
-项目名 3d-lofi-room（包名 `3d-lofi-room`，打包产物 `3D-Lofi-Room-Portable-<版本>.exe`）；场景名仍是「慢慢房间 · Lofi Room」。本项目 AGENTS.md 的目录、命名与唯一导出入口优先于参考提示词的示例目录。
+项目名 3d-lofi-room（包名 `3d-lofi-room`，打包产物 `3D-Lofi-Room-Portable-<版本>.exe`）；场景名仍是「四季房间 · Lofi Room」。本项目 AGENTS.md 的目录、命名与唯一导出入口优先于参考提示词的示例目录。
 
 | 路径 | 责任 |
 | --- | --- |

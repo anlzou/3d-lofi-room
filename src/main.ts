@@ -3,6 +3,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
+import { loadWarriors, type Warriors } from './warrior';
 import { loadBakedLighting } from './baked-lighting';
 import { roomControls } from './room-controls';
 import { consoleDrag } from './console-drag';
@@ -82,6 +83,8 @@ document.addEventListener('pointercancel', () => ringPressed(false), true);
 hour=settings.state.time;
 let life: ReturnType<typeof roomLife> | undefined;
 let touch:ReturnType<typeof touchFeedback>|undefined;
+// The window-sill warriors are a runtime import (see warrior.ts), so they can be absent.
+let warriors:Warriors|undefined;
 const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
 // Meshes kept out of static batching because their material is driven at runtime:
 // the pendant and bedside shades glow on demand, and every string-light bulb animates.
@@ -652,6 +655,9 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
     if(!hit)return;
     const names:string[]=[];for(let p:THREE.Object3D|null=hit.object;p;p=p.parent)names.push(p.name);
     const feedback=touch?.activate(names);if(feedback){settings.sync();settings.save();status.textContent=feedback;refreshShadows();return;}
+    // The warriors answer to their own clips rather than to a switch, so a click on one plays the
+    // next move instead of toggling a device.
+    const played=warriors?.play(names);if(played){status.textContent=played;return;}
     const key=hitDevice(names);
     if(key){settings.state.devices[key]=!settings.state.devices[key];settings.sync();settings.save();updateLight();status.textContent=`${key==='heater'?'暖炉':lightLabels[key]}已${settings.state.devices[key]?'开启':'关闭'}`;}
   });
@@ -691,6 +697,12 @@ void (async () => {
     paintProgress('build');
     await nextFrame();
     await ready(gltf);
+    // The room is already standing before the warriors arrive, so an FBX that fails to load leaves
+    // the room exactly as it was — with the mecha it always had.
+    try {
+      warriors = await loadWarriors(gltf.scene, scene, `${roomBase}models/Warrior.fbx`);
+      refreshShadows();
+    } catch (error) { console.warn('[lofi] Warrior.fbx 未加载，保留窗户上的机甲', error); }
   } catch (error) {
     clearInterval(slowNetworkWatch);
     failLoading('房间加载失败 · 请检查网络后点击重试 ↻', error);
@@ -710,6 +722,8 @@ function resize(force = false) {
   renderer.setSize(innerWidth, innerHeight);
 }
 window.addEventListener('resize', () => resize());
+// TEMP WARRIOR PROBE (remove)
+Object.assign(window, { __lofi: { scene, camera, renderer, settings } });
 // Entering fullscreen hides a phone's URL bar and turning the phone swaps the viewport, and Chrome
 // may still report the previous size inside the event itself, so settle it again on the next
 // frames. Rotating the phone is the case that matters most: without it the canvas keeps the old
@@ -739,6 +753,7 @@ function animate(now: number) {
   fade.update(delta, settings.state.devices, settings.state.showcase);
   weatherDim=THREE.MathUtils.damp(weatherDim,settings.state.weather==='clear'?1:settings.state.weather==='cloudy'?.72:.3,.6,delta);
   updateLight();life?.update(delta);touch?.update(delta);
+  if (warriors) { warriors.setSpeed(settings.state.warriorSpeed); warriors.update(delta); }
   if (fanBlades) fanBlades.rotation.z += delta * [0, 7, 38][settings.state.devices.fanSpeed];
   for (const { sprite, base, offset } of sleepMarks) {
     const breath = (Math.sin(now / 1300 - offset * .8) + 1) / 2;

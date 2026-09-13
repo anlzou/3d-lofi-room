@@ -15,7 +15,7 @@ export function roomControls(onChange: () => void) {
     <section class="panel-card"><h2>环境</h2><div class="panel-pair">
     <label>季节<span class="dropdown" id="season-drop"></span></label>
     <label>窗外<span class="dropdown" id="weather-drop"></span></label>
-    </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></section>
+    </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div><label class="volume-row">战士动作速度<input id="warrior-speed" aria-label="战士动作速度" type="range" min="0" max="2" step=".1" /><output id="warrior-speed-value">1.0×</output></label></section>
     <section class="panel-card"><h2>声音</h2><div class="panel-buttons"><button id="sound">开启环境声</button><button id="music" aria-pressed="false">播放窗边留座 ♫</button><button id="chime" aria-pressed="false">风铃声 · 关</button></div>
     <label class="volume-row">音量<input id="volume" aria-label="音量" type="range" min="0" max="1" step=".01" /></label></section></div>`;
   document.querySelector('.console-body')!.append(panel);
@@ -51,11 +51,15 @@ export function roomControls(onChange: () => void) {
     panel.querySelectorAll<HTMLButtonElement>('[data-flag]').forEach(b => b.setAttribute('aria-pressed',String(state.strip[b.dataset.flag as 'cycle'])));
     select<HTMLButtonElement>('#fan').textContent = ['风扇 · 停','风扇 · 慢','风扇 · 快'][state.devices.fanSpeed];
     select('#auto').setAttribute('aria-pressed',String(state.autopilot));
+    const warriorSpeed = select<HTMLInputElement>('#warrior-speed');
+    if (warriorSpeed.value !== String(state.warriorSpeed)) warriorSpeed.value = String(state.warriorSpeed);
+    select<HTMLOutputElement>('#warrior-speed-value').textContent = `${state.warriorSpeed.toFixed(1)}×`;
     document.querySelector('#season-label')!.textContent = `${state.season.toUpperCase()}, 2026`;
   };
   const changed = () => { sync(); save(); onChange(); };
   panel.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(b => b.onclick=()=>{const k=b.dataset.device as 'lamp';state.devices[k]=!state.devices[k];changed();});
   panel.querySelectorAll<HTMLInputElement>('[data-level]').forEach(input => input.oninput=()=>{state.levels[input.dataset.level as LightKey]=Number(input.value)/100;changed();});
+  select<HTMLInputElement>('#warrior-speed').oninput=e=>{state.warriorSpeed=Number((e.target as HTMLInputElement).value);changed();};
   select<HTMLInputElement>('[data-color="stringLights"]').oninput=e=>{state.strip.color=(e.target as HTMLInputElement).value.toLowerCase();changed();};
   select<HTMLInputElement>('[data-blink="stringLights"]').oninput=e=>{state.strip.blink=Number((e.target as HTMLInputElement).value);changed();};
   panel.querySelectorAll<HTMLButtonElement>('[data-flag]').forEach(b => b.onclick=()=>{
