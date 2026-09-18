@@ -61,7 +61,7 @@ const fullscreen = document.querySelector<HTMLButtonElement>('#fullscreen')!;
 let hour = 11 + 30 / 60;
 // Last minute written to the clock, so an unchanged clock or phase is not rewritten per frame.
 let shownMinutes = -1;
-const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); }, index => { warriorSceneWanted = index; });
+const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); }, index => { warriorSceneWanted = index; warriorRandom = false; });
 // Every light is multiplied by this eased 0..1 value, so switches flip instantly while the
 // room fades. 展示模式 uses the slow curve; manual taps keep the quick one.
 const fade = lightFade(settings.state.devices);
@@ -86,10 +86,14 @@ let touch:ReturnType<typeof touchFeedback>|undefined;
 // The window-sill warriors are a runtime import (see warrior.ts), so they can be absent.
 let warriors:Warriors|undefined;
 // 窗台对打 state: the beat last announced, the script the console asked for, and the desk lamp's
-// setting to hand back once the scene is over.
+// setting to hand back once the scene is over. The last three belong to the shows the lamp starts
+// by itself — those play a single pass and end when the light goes.
 let warriorBeat='';
 let warriorSceneWanted=0;
 let warriorLampBefore:boolean|undefined;
+let warriorRandom=false;
+let warriorPasses=0;
+let lampWasOn:boolean|undefined;
 const screenLights: {light:THREE.PointLight;tv:boolean}[]=[];
 // Meshes kept out of static batching because their material is driven at runtime:
 // the pendant and bedside shades glow on demand, and every string-light bulb animates.
@@ -759,13 +763,43 @@ function animate(now: number) {
   if (warriors) {
     warriors.setSpeed(settings.state.warriorSpeed);
     warriors.update(delta);
-    // The console's 互动动画 menu is the only way in and out of a script: 不播放 stops it.
+    // The desk lamp doubles as the stage light: lighting it — by hand or by 展示模式's routine — puts
+    // on one random 剧场 for a single pass, and putting the light out ends the show. The console's
+    // 互动动画 menu is the other way in: that one keeps looping, and the lamp goes back to whatever
+    // it was when the menu returns to 不播放.
+    const lampOn = settings.state.devices.lamp;
+    if (lampWasOn === undefined) lampWasOn = lampOn;
+    if (lampOn && !lampWasOn && !warriors.scenePlaying()) {
+      const picked = warriors.selectRandomScene();
+      if (picked) {
+        warriorSceneWanted = picked;
+        warriorRandom = true;
+        warriorPasses = warriors.sceneLoops();
+        warriorBeat = '';
+        settings.scene(picked);
+      }
+    } else if (!lampOn && warriorRandom && warriors.scenePlaying()) {
+      // The light went out, so the lamp's own show ends with it — and the lamp stays where the room
+      // put it. (A script picked in the menu owns the lamp while it runs, so this does not apply.)
+      warriorSceneWanted = 0;
+      warriorRandom = false;
+      settings.scene(0);
+      status.textContent = '台灯熄灭 · 剧场收场';
+    }
+    lampWasOn = lampOn;
+    if (warriorRandom && warriors.scenePlaying() && warriors.sceneLoops() > warriorPasses) {
+      // One pass is what switching the lamp on buys; the lamp itself is not touched.
+      warriorSceneWanted = 0;
+      warriorRandom = false;
+      settings.scene(0);
+    }
     if (warriorSceneWanted !== warriors.sceneIndex()) {
       const was = warriors.sceneIndex();
       const now = warriors.selectScene(warriorSceneWanted);
       warriorBeat = '';
-      if (now && !was) {
-        // The scene is lit by the desk lamp, and the room's own switch goes back afterwards.
+      if (now && !was && !warriorRandom) {
+        // A script picked in the menu is lit by the desk lamp, and the room's own switch goes back
+        // afterwards.
         warriorLampBefore = settings.state.devices.lamp;
         settings.state.devices.lamp = true;
         settings.sync();
@@ -779,8 +813,9 @@ function animate(now: number) {
       }
     }
     if (warriors.scenePlaying()) {
-      // 展示模式 could switch the lamp back off between beats, so hold it while a script runs.
-      if (!settings.state.devices.lamp) { settings.state.devices.lamp = true; settings.sync(); }
+      // A script picked in the menu keeps its stage light: 展示模式 would otherwise switch the lamp
+      // back off between beats. The lamp's own shows leave the room's lighting exactly as it is.
+      if (!warriorRandom && !settings.state.devices.lamp) { settings.state.devices.lamp = true; settings.sync(); }
       const beat = warriors.sceneBeat();
       if (beat && beat !== warriorBeat) { warriorBeat = beat; status.textContent = beat; }
     }

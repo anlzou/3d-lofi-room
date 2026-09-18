@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+.next/
+*.log
+*.lock
+coverage/
+__pycache__/
+.env
+demo/
+.vscode/
+.github/
+doc/
+
+blender/
+desktop/
+docs

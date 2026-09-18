@@ -13,10 +13,10 @@ export function roomControls(onChange: () => void, onScene?: (index: number) => 
   panel.innerHTML = `<summary>灯光 · 屏幕 · 环境 · 窗台战士 · 声音 · 面板</summary><div class="panel-groups">
     <details class="panel-card" open><summary>灯光</summary>${rows(['lamp','bedsideLamp','ceilingLamp','lavaLamp','stringLights','streetLamp'])}</details>
     <details class="panel-card" open><summary>屏幕</summary>${rows(['mac','tv'])}</details>
-    <details class="panel-card" open><summary>环境</summary><div class="panel-pair">
-    <label>季节<span class="dropdown" id="season-drop"></span></label>
-    <label>窗外<span class="dropdown" id="weather-drop"></span></label>
-    </div><div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></details>
+    <details class="panel-card" open><summary>环境</summary>
+    <label class="field-row">季节<span class="dropdown" id="season-drop"></span></label>
+    <label class="field-row">窗外<span class="dropdown" id="weather-drop"></span></label>
+    <div class="panel-buttons"><button data-device="heater">暖炉</button><button id="fan">风扇 · 停</button><button id="auto">跟随本地时间</button></div></details>
     <details class="panel-card" open><summary>窗台战士</summary>
     <label class="field-row">互动动画<span class="dropdown" id="scene-drop"></span></label>
     <label class="field-row">动作速度<input id="warrior-speed" aria-label="战士动作速度" type="range" min="0" max="2" step=".1" /><output id="warrior-speed-value">1.0×</output></label></details>
@@ -39,7 +39,10 @@ export function roomControls(onChange: () => void, onScene?: (index: number) => 
   }, '天气');
   // 互动动画：两套剧本由同一个下拉选——“不播放”就是停止，菜单直接由剧本表构建。
   const sceneChoices = [{ value: '0', label: '不播放' }, ...scripts.map((script, index) => ({ value: String(index + 1), label: script.label }))];
-  const sceneDrop = dropdown(select('#scene-drop'), sceneChoices, '0', value => onScene?.(Number(value)), '互动动画');
+  // The menu also shows a scene it did not choose (lighting the desk lamp starts a random one), so
+  // the current choice is kept here and every sync repaints it.
+  let sceneChosen = '0';
+  const sceneDrop = dropdown(select('#scene-drop'), sceneChoices, sceneChosen, value => { sceneChosen = value; onScene?.(Number(value)); }, '互动动画');
   const save = () => { try { localStorage.setItem('lofi-room-v1',JSON.stringify(state)); } catch { /* Nonessential persistence. */ } };
   const sync = () => {
     seasonDrop.set(state.season);
@@ -71,6 +74,7 @@ export function roomControls(onChange: () => void, onScene?: (index: number) => 
     if (glass.value !== String(state.glass)) glass.value = String(state.glass);
     select<HTMLOutputElement>('#glass-value').textContent = `${Math.round(state.glass * 100)}%`;
     applyGlass(state.glass);
+    sceneDrop.set(sceneChosen);
     document.querySelector('#season-label')!.textContent = `${state.season.toUpperCase()}, 2026`;
   };
   const changed = () => { sync(); save(); onChange(); };
@@ -135,6 +139,8 @@ export function roomControls(onChange: () => void, onScene?: (index: number) => 
     if(i>=0){state.season=seasons[i];state.weather=legalWeather(state.season,state.weather);state.autopilot=false;changed();}
   });
   sync();
-  return {state,save,sync};
+  // `scene` lets the room show a script it started on its own (the desk lamp picks a random one);
+  // `set` only repaints the label, so this never loops back into onScene.
+  return {state,save,sync,scene:(index:number)=>{ sceneChosen=String(index); sceneDrop.set(sceneChosen); }};
 }
 
