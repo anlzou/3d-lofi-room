@@ -159,3 +159,19 @@ input[type=range]{height:28px;touch-action:pan-y}
 @media(max-height:520px) and (max-width:700px){
 .lamp-row{grid-template-columns:50px 32px 1fr 30px}
 }
+/* Television controls reuse the console cards. These only cover what the shared rows do not:
+   a text field, a site line, and [hidden] winning over the card's display:flex. */
+.room-panel[hidden]{display:none !important}
+.room-panel input[type=url],.room-panel input[type=text]{width:100%;min-height:var(--ctl-h);margin:0;padding:0 8px;border-radius:6px;border:1px solid #ffffff1f;background:#ffffff05;color:#ede4d4;font:inherit;font-size:11px;user-select:text}
+.room-panel input[type=url]:focus,.room-panel input[type=text]:focus{border-color:#c9ad7566;outline:none}
+.tv-sites{display:grid;gap:4px}
+.tv-site{display:grid;grid-template-columns:1fr var(--sw-w) auto;align-items:center;gap:var(--row-gap);min-height:24px}
+.tv-site.is-off{opacity:.45}
+.tv-site>button:first-child{justify-content:flex-start;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.tv-form{display:grid;gap:6px;margin-top:8px}
+.tv-empty,.tv-note{margin:6px 0 0;font-size:10px;line-height:1.4}
+.tv-empty{opacity:.5}
+.tv-note{color:#ffc1a9}
+.tv-form[hidden],.tv-empty[hidden],.tv-note[hidden],.tv-panel button[hidden]{display:none !important}
+.tv-panel button:disabled{opacity:.35;cursor:default}
+@media(pointer:coarse){.room-panel input[type=url],.room-panel input[type=text]{min-height:34px}}

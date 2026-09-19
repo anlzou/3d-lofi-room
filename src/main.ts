@@ -14,8 +14,9 @@ import { frameGovernor, pixelRatioFor, bufferRatio } from './perf-governor';
 import { roomLife } from './room-life';
 import { legalWeather, lightLabels, lightKeys, daylightAt, showcaseAt, crossedMidnight, nextShowcaseDay, showcaseStrip, seasonLabels, seasonMottos, weatherLabels, type WorldState } from './world-state';
 import { hitDevice } from './device-hit';
-import { dropdown } from './dropdown';
+import { dropdown, type Dropdown } from './dropdown';
 import {touchFeedback} from './touch-feedback';
+import {createTv, type Tv} from './tv';
 
 const app = document.querySelector<HTMLDivElement>('#app')!;
 const status = document.querySelector<HTMLElement>('#status')!;
@@ -61,7 +62,60 @@ const fullscreen = document.querySelector<HTMLButtonElement>('#fullscreen')!;
 let hour = 11 + 30 / 60;
 // Last minute written to the clock, so an unchanged clock or phase is not rewritten per frame.
 let shownMinutes = -1;
-const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); }, index => { warriorSceneWanted = index; warriorRandom = false; });
+let tv: Tv | undefined;
+let life: ReturnType<typeof roomLife> | undefined;
+let cameraDrop: Dropdown<WorldState['camera']> | undefined;
+let musicPlaying = false;
+let cameraBeforeMusic: WorldState['camera'] | undefined;
+function setTv(on: boolean, moveCamera = true) {
+  musicPlaying = on;
+  settings.setMusic(on);
+  settings.state.devices.tv = on;
+  if (on) {
+    if (moveCamera && settings.state.camera !== 'tv') cameraBeforeMusic = settings.state.camera;
+    if (moveCamera) {
+      settings.state.camera = 'tv';
+      cameraDrop?.set('tv');
+    }
+    tv?.resume();
+  } else {
+    tv?.unload();
+    if (moveCamera && settings.state.camera === 'tv' && cameraBeforeMusic && cameraBeforeMusic !== 'tv') {
+      settings.state.camera = cameraBeforeMusic;
+      cameraDrop?.set(cameraBeforeMusic);
+    }
+    if (moveCamera) cameraBeforeMusic = undefined;
+  }
+  settings.sync();
+  settings.save();
+  updateLight();
+  life?.update(0);
+  if (moveCamera) setCamera();
+}
+const settings = roomControls(() => { hour=settings.state.time; updateLight(); life?.update(0); tv?.syncPower(); }, index => { warriorSceneWanted = index; warriorRandom = false; }, on => setTv(on));
+const roomPanel = document.querySelector<HTMLDetailsElement>('.console-body > .room-panel')!;
+tv = createTv({
+  roomPanel,
+  powered: () => settings.state.devices.tv,
+  setPowered: on => setTv(on),
+  level: () => settings.state.levels.tv,
+  setLevel: value => {
+    settings.state.levels.tv = value;
+    settings.sync();
+    settings.save();
+    updateLight();
+    life?.update(0);
+    tv?.syncPower();
+  },
+  musicOn: () => musicPlaying,
+  onMusic: on => setTv(on),
+});
+if (settings.state.devices.tv) {
+  musicPlaying = true;
+  settings.setMusic(true);
+  tv.resume();
+  tv.syncPower();
+}
 // Every light is multiplied by this eased 0..1 value, so switches flip instantly while the
 // room fades. 展示模式 uses the slow curve; manual taps keep the quick one.
 const fade = lightFade(settings.state.devices);
@@ -81,7 +135,6 @@ dockToggle.addEventListener('pointerdown', () => ringPressed(true));
 document.addEventListener('pointerup', () => ringPressed(false), true);
 document.addEventListener('pointercancel', () => ringPressed(false), true);
 hour=settings.state.time;
-let life: ReturnType<typeof roomLife> | undefined;
 let touch:ReturnType<typeof touchFeedback>|undefined;
 // The window-sill warriors are a runtime import (see warrior.ts), so they can be absent.
 let warriors:Warriors|undefined;
@@ -177,22 +230,34 @@ const presets = {
   room: { position: [-5.72, 5.588, 7.89], target: [0, 1.10, -.25], fov: 40 },
   desk: { position: [-3.5, 2.9, 3], target: [-.72, 1.28, -1.06], fov: 37 },
   window: { position: [-3.6, 3.1, 4.7], target: [-.25, 1.45, -.95], fov: 40 },
-  // Sitting in front of the CRT: the screen centre and its facing direction come from the
-  // model (EMIT_screen_crt), two metres out along that normal, eyes a little above the tube.
-  tv: { position: [-.53, 1.09, 2.65], target: [-1.67, .77, 1.01], fov: 34 },
+  // Closer than the two-metre establishing shot: about 1.15 m in front of EMIT_screen_crt,
+  // still far enough to keep the bezel in frame. minDistance drops with it, or OrbitControls
+  // would push the camera straight back out.
+  tv: { position: [-1.02, 0.95, 1.95], target: [-1.67, .77, 1.01], fov: 32 },
 };
+function frameCamera() {
+  camera.aspect = innerWidth / innerHeight;
+  // CSS3D has no view offset, so the TV shot stays centred or the page would miss the tube.
+  if (settings.state.camera === 'tv') camera.clearViewOffset();
+  else camera.setViewOffset(innerWidth, innerHeight, 0, innerHeight * .055, innerWidth, innerHeight);
+  camera.updateProjectionMatrix();
+}
 function setCamera() {
   const choice = settings.state.camera;
   const p = presets[choice] ?? presets.room;
+  const tvMode = choice === 'tv';
+  controls.minDistance = tvMode ? .75 : 2;
   controls.target.fromArray(p.target);
   camera.position.fromArray(p.position);
   if (innerWidth < 650 && choice === 'room') {
     camera.position.sub(controls.target).multiplyScalar(1.35).add(controls.target);
   }
   camera.fov = p.fov;
-  camera.setViewOffset(innerWidth, innerHeight, 0, innerHeight * .055, innerWidth, innerHeight);
-  camera.updateProjectionMatrix();
+  frameCamera();
   controls.update();
+  // Television view swaps the console for the TV panel; any other preset puts the room
+  // settings back, including the open/closed state they had before.
+  tv?.setMode(tvMode);
 }
 // The camera list opens inside the page: the native select popup is drawn by the system and takes
 // over the screen on phones, which looks nothing like the console around it.
@@ -202,7 +267,7 @@ const cameraChoices: { value: WorldState['camera']; label: string }[] = [
   { value: 'window', label: '03 窗边' },
   { value: 'tv', label: '04 电视' },
 ];
-dropdown<WorldState['camera']>(cameraHost, cameraChoices, settings.state.camera, value => {
+cameraDrop = dropdown<WorldState['camera']>(cameraHost, cameraChoices, settings.state.camera, value => {
   settings.state.camera = value;
   settings.save();
   setCamera();
@@ -325,6 +390,7 @@ function updateLight() {
     if (label !== phase.textContent) phase.textContent = label;
   }
   if (Math.abs(Number(slider.value) - hour) > .004) slider.value = String(hour);
+  tv?.syncPower();
 }
 updateLight();
 slider.addEventListener('input', () => { hour = Number(slider.value);settings.state.time=hour;settings.state.autopilot=false;settings.sync();settings.save(); updateLight(); });
@@ -366,7 +432,9 @@ function applyShowcase(announce = false) {
   if (rolled) showcaseStep = '';
   const before: WorldState['devices'] = { ...settings.state.devices };
   showcaseStep = step.id;
+  const keepTv = settings.state.devices.tv;
   Object.assign(settings.state.devices, step.devices);
+  settings.state.devices.tv = keepTv;
   settings.sync();
   settings.save();
   updateLight();
@@ -532,6 +600,8 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
   });
   scene.add(gltf.scene);
   gltf.scene.updateMatrixWorld(true);
+  const crt = gltf.scene.getObjectByName('EMIT_screen_crt');
+  if (crt instanceof THREE.Mesh) tv?.mount(crt, camera, app);
   // Grazing angles are where detail smears: let the hardware follow the view direction when it
   // samples the wood, walls and props, instead of picking one mip and blurring it. One-off, and
   // it costs nothing per frame.
@@ -668,6 +738,7 @@ const ready = async (gltf: Awaited<ReturnType<typeof roomLoader.parseAsync>>) =>
     // next move instead of toggling a device.
     const played=warriors?.play(names);if(played){status.textContent=played;return;}
     const key=hitDevice(names);
+    if(key==='tv'){setTv(!settings.state.devices.tv,false);status.textContent=`电视已${settings.state.devices.tv?'开启':'关闭'}`;return;}
     if(key){settings.state.devices[key]=!settings.state.devices[key];settings.sync();settings.save();updateLight();status.textContent=`${key==='heater'?'暖炉':lightLabels[key]}已${settings.state.devices[key]?'开启':'关闭'}`;}
   });
   loaded = true;
@@ -722,9 +793,8 @@ function resize(force = false) {
   // same result: only the first one for a given size has work to do.
   if (!force && innerWidth === resizedWidth && innerHeight === resizedHeight) return;
   resizedWidth = innerWidth; resizedHeight = innerHeight;
-  camera.aspect = innerWidth / innerHeight;
-  camera.setViewOffset(innerWidth, innerHeight, 0, innerHeight * .055, innerWidth, innerHeight);
-  camera.updateProjectionMatrix();
+  frameCamera();
+  tv?.resize();
   // The window itself changed, so the element's CSS size has to follow; the ratio is recomputed
   // for the new area by the next applyPixelRatio call through the same path.
   renderer.setPixelRatio(bufferRatio(innerWidth, innerHeight, pixelRatioFor(innerWidth, innerHeight, devicePixelRatio || 1), governor.scale()));
@@ -831,6 +901,7 @@ function animate(now: number) {
   if (loaded && governor.sample(delta * 1000)) applyPixelRatio();
   controls.update();
   renderer.render(scene, camera);
+  tv?.render();
   frame = requestAnimationFrame(animate);
 }
 document.addEventListener('visibilitychange', () => {

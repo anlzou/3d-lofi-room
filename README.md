@@ -2,7 +2,7 @@
 
 > A little space, a slower pace.
 
-一个可以旋转、探索和互动的 3D Lofi 房间（场景名仍是「四季房间 · Lofi Room」）：黄昏的光从百叶窗之间落进来，老 Macintosh 的终端在滚动，CRT 电视播放原创像素画面，风扇、植物、音响、蒸汽和窗边风铃让这个小房间一直有呼吸。
+一个可以旋转、探索和互动的 3D Lofi 房间（场景名仍是「四季房间 · Lofi Room」）：黄昏的光从百叶窗之间落进来，老 Macintosh 的终端在滚动，CRT 电视可以打开网页，风扇、植物、音响、蒸汽和窗边风铃让这个小房间一直有呼吸。
 
 项目在此基础上向「多场景」演进：当前只有这一个房间，后续每个新场景会自带模型、文档与机位，共用同一套运行时（见 [场景与目录约定](docs/scenes.md)）。
 
@@ -14,7 +14,6 @@
 
 - 原作仓库与下载：[**ACKEYTLC/lofi-room_by_Astra**](https://github.com/ACKEYTLC/lofi-room_by_Astra)（Releases 中的 Windows 便携版仍指向此处）
 - 本仓库（3d-lofi-room）在原作基础上继续开发：重命名项目、把运行时拆成可复用模块（光照贴图混合、自适应分辨率、加载进度、演示模式作息、太阳阴影节流等），并准备接入更多场景。
-- 房间内音乐《窗边留座 / Window Seat》为本项目原创（全部乐器由 `scripts/compose_bgm.py` 合成，无外部录音），元数据见 [`public/audio/credits.json`](public/audio/credits.json)。
 - 模型与贴图均由本仓库自己的 Blender 源（`blender/lofi_room.blend`）经 `scripts/export_glb.py` 导出，管线约定见 [`AGENTS.md`](AGENTS.md)。
 
 ## 现在就试试

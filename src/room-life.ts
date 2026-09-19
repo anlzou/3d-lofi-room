@@ -3,7 +3,6 @@ import type { WorldState } from './world-state';
 import {fanButtonLamp, rainbowHue} from './world-state';
 import type {LightFadeKey} from './light-fade';
 import {eventClock} from './events';
-import {audioActivity} from './audio-activity';
 // `fade` is the eased 0..1 output of each device switch, owned by main.ts, so glows ramp in
 // and out on the same curve as the real lights instead of popping.
 export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldState, fade: (key: LightFadeKey) => number = () => 1) {
@@ -279,7 +278,6 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
         if(m.o.name==='ANIM_windchime')m.o.rotation.z+=Math.sin(elapsed*3.8)*gust*.085;
         if(m.o.name.startsWith('ANIM_blinds'))m.o.rotation.x+=Math.sin(elapsed*2.2)*gust*.025;
         if(m.o.name.startsWith('ANIM_lava'))m.o.position.y+=Math.sin(elapsed*.48+Number(m.o.name.slice(-1))*2)*.012;
-        if(m.o.name.startsWith('ANIM_speaker')&&audioActivity.playing)m.o.rotation.x+=Math.sin(audioActivity.time()*76/60*Math.PI*2)*.013;
       }
       for(const w of wisps){const t=(elapsed*.24+w.offset)%1;w.sprite.position.copy(w.base).add(new THREE.Vector3(Math.sin(t*5+w.offset)*.018,t*.24,0));w.sprite.scale.setScalar(.045+t*.085);(w.sprite.material as THREE.SpriteMaterial).opacity=(w.kettle&&!state.devices.heater?0:1)*Math.sin(t*Math.PI)*.48;}
       for(const m of coils)m.emissiveIntensity=THREE.MathUtils.damp(m.emissiveIntensity,2.5*fade('heater'),2,dt);
@@ -345,26 +343,20 @@ export function roomLife(root: THREE.Object3D, scene: THREE.Scene, state: WorldS
       const power=`${state.devices.tv}:${state.devices.mac}:${state.levels.tv}:${state.levels.mac}`;
       if(frame!==lastFrame||power!==lastPower){lastFrame=frame;lastPower=power;for(const s of screens){
         const on=['EMIT_screen_scope','EMIT_screen_flip'].includes(s.mesh.name)||(s.tv?state.devices.tv:state.devices.mac),c=s.ctx;
-        c.fillStyle=on?(s.tv?'#263c60':'#c3d1b6'):'#080c12';c.fillRect(0,0,256,192);
+        c.fillStyle=on?(s.tv?'#0c1014':'#c3d1b6'):'#080c12';c.fillRect(0,0,256,192);
         s.mat.emissiveIntensity=on?.8*state.levels[s.tv?'tv':'mac']*fade(s.tv?'tv':'mac'):0;
         if(s.mesh.name==='EMIT_screen_flip'){
           const now=new Date();c.fillStyle='#242b2b';c.fillRect(0,0,256,192);c.fillStyle='#efe4c6';c.font='bold 68px monospace';c.textAlign='center';c.fillText(String(now.getMonth()+1).padStart(2,'0'),65,119);c.fillText(String(now.getDate()).padStart(2,'0'),192,119);c.font='19px monospace';c.fillText('MONTH',65,160);c.fillText('DAY',192,160);c.textAlign='start';c.fillStyle='#161b1b';c.fillRect(124,0,7,192);
         }else if(s.mesh.name==='EMIT_screen_scope'){
           c.fillStyle='#101f1b';c.fillRect(0,0,256,192);c.strokeStyle='#2e4c3e';c.lineWidth=1;for(let i=0;i<8;i++){c.beginPath();c.moveTo(i*32,0);c.lineTo(i*32,192);c.stroke();c.beginPath();c.moveTo(0,i*24);c.lineTo(256,i*24);c.stroke();}
           c.strokeStyle='#b4ec99';c.lineWidth=3;c.beginPath();for(let x=0;x<256;x++){const y=96+Math.sin(x*.065-elapsed*3)*35+Math.sin(x*.13+elapsed)*8;x?c.lineTo(x,y):c.moveTo(x,y);}c.stroke();
-        }else if(on&&s.tv){
-          c.fillStyle='#d99b81';c.fillRect(0,112,256,80);c.fillStyle='#f1dca2';c.fillRect(194,22,22,22);
-          for(let i=0;i<8;i++){c.fillStyle='#4a7269';c.fillRect(i*40-((frame*2)%40),104-(i%3)*8,24,12);}
-          const y=90-Math.abs(Math.sin(elapsed*2))*22;c.fillStyle='#f4e6ba';c.fillRect(100,y,12,12);c.fillStyle='#ba6267';c.fillRect(98,y+12,16,15);c.fillStyle='#263443';c.fillRect(98,y+27,6,5);c.fillRect(109,y+27,6,5);
-          c.fillStyle='#f2dfaa';c.font='10px monospace';c.fillText('LITTLE EVENING   001',12,15);
-        } else if(on){
+        } else if(on && !s.tv){
           c.fillStyle='#13231d';c.fillRect(0,0,256,192);c.fillStyle='#98cfa1';c.font='12px monospace';
           const lines=['$ room --listen','[ok] loading memories','sync /home/window','render sunset .. done','audio buffer ready','read diary.txt','[ok] world is quiet','compile little dreams'];
           const row=Math.floor(elapsed*7),scroll=(elapsed*7%1)*17;
           for(let i=0;i<13;i++)c.fillText(lines[(row+i)%lines.length],8,i*17-scroll);
         }
         if(on&&event==='mac-note'&&s.mesh.name==='EMIT_screen_mac'){c.fillStyle='#f1ddba';c.fillRect(35,68,190,64);c.strokeStyle='#455448';c.strokeRect(35,68,190,64);c.fillStyle='#455448';c.font='12px monospace';c.fillText('Time for a little',47,93);c.fillText('stretch.',47,112);}
-        if(on&&event==='tv-static'&&s.tv){for(let i=0;i<20;i++){c.fillStyle=i%2?'#87948b':'#293e4b';c.fillRect(0,(i*13+frame*7)%192,256,3);}}
         s.texture.needsUpdate=true;
       }}
       const wet=['drizzle','rain','storm','snow'].includes(state.weather);

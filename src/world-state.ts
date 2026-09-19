@@ -149,7 +149,7 @@ export function createDefaultState(): WorldState {
     schemaVersion: 2, season: 'autumn', time: 11 + 30 / 60, weather: 'clear', autopilot: false, showcase: true,
     audio: { enabled: false, masterVolume: 0.12 }, camera: 'room', warriorSpeed: 1, glass: .72,
     devices: { lamp: true, bedsideLamp:false, ceilingLamp:false, lavaLamp:false, stringLights:false, streetLamp:true, tv: true, mac: true, windowOpen: false, blinds: true, fanSpeed: 0, heater: false },
-    levels: { lamp: 1, bedsideLamp: 1, ceilingLamp: 1, lavaLamp: 1, stringLights: 1, streetLamp: 1, mac: 1, tv: 1 },
+    levels: { lamp: 0.6, bedsideLamp: 0.4, ceilingLamp: 1, lavaLamp: 1, stringLights: 1, streetLamp: 1, mac: 1, tv: 1 },
     strip: { color: '#ffb266', blink: 0, cycle: false, chase: false, rainbow: false },
   };
 }
